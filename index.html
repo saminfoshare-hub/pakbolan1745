@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PAK BOLAN INTERNATIONAL | Overseas Employment &amp; Manpower Recruitment</title>
+<meta name="description" content="PAK BOLAN INTERNATIONAL connects Pakistani skilled, semi-skilled and professional workers with overseas employment opportunities. Explore current vacancies and submit your application online.">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PAK BOLAN INTERNATIONAL | Overseas Employment & Manpower Recruitment">
+<meta property="og:description" content="Connecting skilled Pakistani professionals and workers with employment opportunities around the world.">
+<meta name="theme-color" content="#0B1E3D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"EmploymentAgency","name":"PAK BOLAN INTERNATIONAL","description":"Overseas employment promoters connecting Pakistani workers with international job opportunities."}
+</script>
+<style>
+/* ==========================================================================
+   PAK BOLAN INTERNATIONAL — DESIGN TOKENS
+   Color: --navy #0b1e3d, --navy-2 #122a52, --navy-3 #1c3a6b, --gold #c6a15b,
+          --ink #12181f, --gray #68707c, --offwhite #f7f6f3, --white #fff,
+          --green #1c8a5b (open/active), --red #c1443c (urgent/closing)
+   Type: Display = Fraunces (serif, gravitas — headlines), Body = Manrope,
+         Utility/mono = IBM Plex Mono (badges, meta/reference data)
+   Signature: rotated dashed-circle "visa stamp" badges for NEW/URGENT/FEATURED,
+   and a dashed flight-path line (with a travelling plane glyph) used in the
+   hero background and the recruitment timeline — ties directly to "overseas".
+   ========================================================================== */
+:root{
+  --navy:#0b1e3d;
+  --navy-2:#122a52;
+  --navy-3:#1c3a6b;
+  --gold:#c6a15b;
+  --gold-bright:#dab873;
+  --ink:#12181f;
+  --gray:#68707c;
+  --gray-light:#9aa1ac;
+  --offwhite:#f7f6f3;
+  --white:#ffffff;
+  --border:rgba(11,30,61,.09);
+  --border-navy:rgba(255,255,255,.12);
+  --green:#1c8a5b;
+  --red:#c1443c;
+  --font-display:'Fraunces', serif;
+  --font-body:'Manrope', sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --container:1240px;
+}
+*,*::before,*::after{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--white); color:var(--ink); font-family:var(--font-body); font-weight:400; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img{max-width:100%; display:block;}
+a{color:inherit; text-decoration:none;}
+ul{list-style:none;}
+button{font-family:inherit; cursor:pointer; border:none; background:none; color:inherit;}
+input,select,textarea{font-family:inherit; color:inherit;}
+.container{max-width:var(--container); margin:0 auto; padding:0 24px;}
+::selection{background:var(--gold); color:var(--navy);}
+::-webkit-scrollbar{width:9px;}
+::-webkit-scrollbar-track{background:var(--offwhite);}
+::-webkit-scrollbar-thumb{background:var(--navy-3); border-radius:10px;}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;} }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--gold); outline-offset:2px; border-radius:2px;
+}
+
+/* utility */
+.eyebrow{
+  font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.16em; font-size:.72rem; color:var(--gold);
+  display:inline-flex; align-items:center; gap:10px; margin-bottom:14px; font-weight:600;
+}
+.eyebrow::before{content:''; width:22px; height:1.5px; background:var(--gold); display:inline-block;}
+.section-title{
+  font-family:var(--font-display); font-weight:600; font-size:clamp(1.9rem,4vw,2.9rem); line-height:1.1; letter-spacing:-.01em; color:var(--navy);
+}
+.section-title em{font-style:italic; color:var(--gold); font-weight:500;}
+.section-sub{color:var(--gray); max-width:560px; font-size:1rem; margin-top:14px;}
+.section-head{margin-bottom:46px;}
+.section-head.center{text-align:center; margin-left:auto; margin-right:auto;}
+.section-head.center .section-sub{margin-left:auto; margin-right:auto;}
+section{position:relative; padding:100px 0;}
+@media (max-width:768px){ section{padding:64px 0;} }
+.on-navy .section-title{color:var(--white);}
+.on-navy .section-sub{color:rgba(255,255,255,.65);}
+
+.btn{
+  font-family:var(--font-body); font-weight:700; font-size:.86rem; padding:15px 30px; border-radius:3px;
+  display:inline-flex; align-items:center; gap:10px; transition:transform .3s var(--ease), box-shadow .3s var(--ease), background .3s;
+  white-space:nowrap; letter-spacing:.01em;
+}
+.btn-gold{background:var(--gold); color:var(--navy);}
+.btn-gold:hover{background:var(--gold-bright); transform:translateY(-2px); box-shadow:0 14px 26px -10px rgba(198,161,91,.5);}
+.btn-navy{background:var(--navy); color:var(--white);}
+.btn-navy:hover{background:var(--navy-2); transform:translateY(-2px);}
+.btn-outline{border:1.5px solid rgba(255,255,255,.4); color:var(--white);}
+.btn-outline:hover{border-color:var(--gold); color:var(--gold); transform:translateY(-2px);}
+.btn-outline-navy{border:1.5px solid var(--border); color:var(--navy);}
+.btn-outline-navy:hover{border-color:var(--navy); transform:translateY(-2px);}
+.btn-sm{padding:9px 16px; font-size:.75rem;}
+.btn-block{width:100%; justify-content:center;}
+
+/* visa-stamp badge (signature) */
+.stamp{
+  display:inline-flex; align-items:center; justify-content:center; text-align:center;
+  font-family:var(--font-mono); font-size:.6rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em;
+  border:1.5px dashed currentColor; border-radius:50%; width:58px; height:58px; transform:rotate(-8deg); line-height:1.15; padding:4px;
+  flex-shrink:0;
+}
+.stamp.new{color:var(--green);}
+.stamp.urgent{color:var(--red);}
+.stamp.featured{color:var(--gold-bright);}
+.stamp.closing{color:var(--red);}
+
+.badge-row{display:flex; gap:6px; flex-wrap:wrap;}
+.mini-tag{
+  font-family:var(--font-mono); font-size:.62rem; text-transform:uppercase; letter-spacing:.06em; font-weight:600;
+  padding:4px 9px; border-radius:3px; border:1px solid; display:inline-flex; align-items:center; gap:5px;
+}
+.mini-tag.new{color:var(--green); border-color:rgba(28,138,91,.3); background:rgba(28,138,91,.06);}
+.mini-tag.urgent{color:var(--red); border-color:rgba(193,68,60,.3); background:rgba(193,68,60,.06);}
+.mini-tag.featured{color:var(--gold); border-color:rgba(198,161,91,.35); background:rgba(198,161,91,.08);}
+.mini-tag.closing{color:var(--red); border-color:rgba(193,68,60,.3); background:rgba(193,68,60,.06);}
+.mini-tag.sample{color:var(--gray); border-color:var(--border); background:var(--offwhite);}
+
+.glass-navy{background:linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid var(--border-navy); backdrop-filter:blur(10px);}
+.card-white{background:var(--white); border:1px solid var(--border); border-radius:6px;}
+
+/* flight-path dashed line (signature) */
+.flight-path{stroke:var(--gold); stroke-width:1.6; fill:none; stroke-dasharray:6 7; opacity:.55;}
+.flight-plane{animation:planeMove 8s linear infinite;}
+@keyframes planeMove{ from{ offset-distance:0%; } to{ offset-distance:100%; } }
+
+/* ============ NAV ============ */
+header{position:fixed; top:0; left:0; right:0; z-index:100; transition:all .35s var(--ease); padding:20px 0;}
+header.scrolled{padding:12px 0; background:var(--navy); box-shadow:0 10px 30px -14px rgba(0,0,0,.4);}
+.nav-wrap{display:flex; align-items:center; justify-content:space-between;}
+.logo{display:flex; align-items:center; gap:10px;}
+.logo-mark{
+  width:38px; height:38px; border:1.5px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:700; color:var(--gold); font-size:1rem; flex-shrink:0;
+}
+.logo-text{font-family:var(--font-display); font-weight:700; font-size:1.02rem; color:var(--white); line-height:1.1; letter-spacing:.01em;}
+.logo-text span{display:block; font-family:var(--font-mono); font-size:.56rem; letter-spacing:.14em; color:var(--gold); font-weight:600; margin-top:2px;}
+.nav-links{display:flex; align-items:center; gap:28px;}
+.nav-links a{font-size:.83rem; font-weight:600; color:rgba(255,255,255,.72); position:relative; padding:6px 0; transition:color .25s;}
+.nav-links a::after{content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--gold); transition:width .3s var(--ease);}
+.nav-links a:hover, .nav-links a.active{color:var(--white);}
+.nav-links a:hover::after, .nav-links a.active::after{width:100%;}
+.nav-cta{display:flex; align-items:center; gap:12px;}
+.burger{display:none; flex-direction:column; gap:5px; width:32px; z-index:200;}
+.burger span{display:block; height:2px; width:100%; background:var(--white); transition:all .3s var(--ease);}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media (max-width:1040px){
+  .nav-links{position:fixed; inset:0 0 0 26%; background:var(--navy); flex-direction:column; justify-content:center; gap:30px; transform:translateX(100%); transition:transform .45s var(--ease); border-left:1px solid var(--border-navy);}
+  .nav-links.open{transform:translateX(0);}
+  .nav-links a{font-size:1.05rem;}
+  .nav-cta .btn-outline{display:none;}
+  .burger{display:flex;}
+}
+.admin-link{font-family:var(--font-mono); font-size:.66rem; color:rgba(255,255,255,.35); letter-spacing:.05em;}
+.admin-link:hover{color:var(--gold);}
+
+/* ============ HERO ============ */
+.hero{
+  min-height:100svh; display:flex; align-items:center; position:relative; overflow:hidden; color:var(--white);
+  background:linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 60%, var(--navy) 100%);
+}
+.hero-map{position:absolute; inset:0; opacity:.5;}
+.hero-map svg{width:100%; height:100%;}
+.hero-glow{position:absolute; inset:0; background:radial-gradient(ellipse 55% 45% at 78% 22%, rgba(198,161,91,.14), transparent 60%); pointer-events:none;}
+.hero .container{position:relative; z-index:3; padding-top:100px;}
+.hero-content{max-width:680px;}
+.hero-eyebrow{
+  font-family:var(--font-mono); font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:600;
+  display:inline-flex; align-items:center; gap:10px; margin-bottom:22px; border:1px solid rgba(198,161,91,.3); padding:8px 16px; border-radius:30px;
+}
+.hero-title{font-family:var(--font-display); font-weight:600; font-size:clamp(2.4rem,5.6vw,4.4rem); line-height:1.06; letter-spacing:-.01em;}
+.hero-title em{font-style:italic; color:var(--gold); font-weight:500;}
+.hero-sub{font-size:1.05rem; color:rgba(255,255,255,.68); max-width:520px; margin:24px 0 36px; line-height:1.65;}
+.hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:56px;}
+.hero-stats{display:flex; gap:40px; flex-wrap:wrap; border-top:1px solid var(--border-navy); padding-top:28px;}
+.hero-stat b{font-family:var(--font-display); font-size:1.9rem; color:var(--gold); display:block; font-weight:600;}
+.hero-stat span{font-size:.75rem; color:rgba(255,255,255,.55); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.06em;}
+
+/* ============ ABOUT ============ */
+.about{background:var(--offwhite);}
+.about-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-bottom:60px;}
+@media (max-width:980px){ .about-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:560px){ .about-grid{grid-template-columns:1fr;} }
+.about-card{padding:30px 24px; transition:transform .35s var(--ease), box-shadow .35s var(--ease);}
+.about-card:hover{transform:translateY(-6px); box-shadow:0 24px 40px -22px rgba(11,30,61,.18);}
+.about-card i{font-size:1.5rem; color:var(--gold); margin-bottom:16px; display:block;}
+.about-card h4{font-family:var(--font-display); font-weight:600; font-size:1.05rem; margin-bottom:10px; color:var(--navy);}
+.about-card p{font-size:.85rem; color:var(--gray); line-height:1.6;}
+
+.why-row{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+@media (max-width:900px){ .why-row{grid-template-columns:1fr;} }
+.why-list{display:flex; flex-direction:column; gap:18px;}
+.why-item{display:flex; gap:16px; align-items:flex-start;}
+.why-item .num{font-family:var(--font-mono); color:var(--gold); font-weight:600; font-size:.85rem; flex-shrink:0; padding-top:2px;}
+.why-item h5{font-family:var(--font-display); font-weight:600; color:var(--navy); font-size:1rem; margin-bottom:4px;}
+.why-item p{font-size:.85rem; color:var(--gray);}
+.why-visual{position:relative; border-radius:8px; overflow:hidden; aspect-ratio:4/5;}
+.why-visual img{width:100%; height:100%; object-fit:cover;}
+.why-visual::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, transparent 50%, rgba(11,30,61,.7));}
+.why-visual-badge{position:absolute; bottom:20px; left:20px; z-index:2; color:var(--white);}
+.why-visual-badge b{font-family:var(--font-display); font-size:1.6rem; display:block;}
+.why-visual-badge span{font-family:var(--font-mono); font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--gold);}
+
+/* ============ VACANCIES ============ */
+.vacancies{background:var(--white);}
+.vac-toolbar{
+  display:flex; flex-wrap:wrap; gap:12px; align-items:center; padding:18px; border:1px solid var(--border); border-radius:8px; margin-bottom:36px;
+  background:var(--offwhite);
+}
+.vac-toolbar input, .vac-toolbar select{
+  background:var(--white); border:1px solid var(--border); border-radius:5px; padding:10px 14px; font-size:.83rem; color:var(--ink);
+}
+.vac-toolbar input{flex:1; min-width:180px;}
+.vac-toolbar select{min-width:140px;}
+.vac-count{font-family:var(--font-mono); font-size:.72rem; color:var(--gray); margin-bottom:20px;}
+.vac-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+@media (max-width:980px){ .vac-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:640px){ .vac-grid{grid-template-columns:1fr;} }
+.vac-card{border:1px solid var(--border); border-radius:8px; padding:22px; transition:all .35s var(--ease); position:relative; display:flex; flex-direction:column;}
+.vac-card:hover{box-shadow:0 26px 44px -24px rgba(11,30,61,.2); border-color:transparent; transform:translateY(-4px);}
+.vac-card-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:14px;}
+.vac-card h4{font-family:var(--font-display); font-weight:600; font-size:1.12rem; color:var(--navy); margin-bottom:4px;}
+.vac-country{font-size:.8rem; color:var(--gray); display:flex; align-items:center; gap:6px;}
+.vac-meta{display:grid; grid-template-columns:1fr 1fr; gap:8px 14px; margin:14px 0; font-size:.78rem;}
+.vac-meta div{color:var(--gray);}
+.vac-meta b{color:var(--ink); display:block; font-family:var(--font-mono); font-size:.78rem; margin-top:1px;}
+.vac-desc{font-size:.82rem; color:var(--gray); margin-bottom:16px; line-height:1.55; flex:1;}
+.vac-footer{display:flex; gap:10px; margin-top:auto; padding-top:14px; border-top:1px solid var(--border);}
+.vac-footer .btn{flex:1; justify-content:center;}
+.vac-deadline{font-family:var(--font-mono); font-size:.68rem; color:var(--red); margin-bottom:10px;}
+.no-results{grid-column:1/-1; text-align:center; padding:50px 20px; color:var(--gray);}
+.no-results i{font-size:2rem; color:var(--border); margin-bottom:14px; display:block;}
+
+/* ============ COUNTRIES ============ */
+.countries{background:var(--navy); color:var(--white);}
+.country-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+@media (max-width:860px){ .country-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:520px){ .country-grid{grid-template-columns:1fr;} }
+.country-card{padding:24px 20px; border-radius:8px; cursor:pointer; transition:all .3s var(--ease); text-align:center;}
+.country-card:hover{background:rgba(198,161,91,.1); border-color:var(--gold); transform:translateY(-4px);}
+.country-card .flag{font-size:2.2rem; margin-bottom:12px;}
+.country-card h5{font-family:var(--font-display); font-weight:600; margin-bottom:4px;}
+.country-card span{font-family:var(--font-mono); font-size:.68rem; color:var(--gold); text-transform:uppercase; letter-spacing:.05em;}
+
+/* ============ PROFESSIONS ============ */
+.professions{background:var(--offwhite);}
+.prof-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px;}
+@media (max-width:980px){ .prof-grid{grid-template-columns:repeat(3,1fr);} }
+@media (max-width:640px){ .prof-grid{grid-template-columns:repeat(2,1fr);} }
+.prof-card{
+  background:var(--white); border:1px solid var(--border); border-radius:8px; padding:22px 16px; text-align:center; cursor:pointer;
+  transition:all .3s var(--ease);
+}
+.prof-card:hover{border-color:var(--gold); transform:translateY(-4px); box-shadow:0 20px 34px -22px rgba(11,30,61,.18);}
+.prof-card i{font-size:1.3rem; color:var(--gold); margin-bottom:12px; display:block;}
+.prof-card span{font-size:.8rem; font-weight:600; color:var(--navy);}
+
+/* ============ PROCESS ============ */
+.process{background:var(--navy); color:var(--white); position:relative; overflow:hidden;}
+.process-track{position:relative; display:grid; grid-template-columns:repeat(4,1fr); gap:24px 20px; margin-top:20px;}
+@media (max-width:900px){ .process-track{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:520px){ .process-track{grid-template-columns:1fr;} }
+.process-step{position:relative; padding:26px 18px; text-align:center;}
+.process-step .stepnum{
+  width:52px; height:52px; border-radius:50%; border:1.5px dashed var(--gold); display:flex; align-items:center; justify-content:center;
+  margin:0 auto 16px; font-family:var(--font-mono); font-size:.85rem; color:var(--gold); font-weight:600;
+}
+.process-step h5{font-family:var(--font-display); font-weight:600; font-size:.95rem; margin-bottom:6px;}
+.process-step p{font-size:.76rem; color:rgba(255,255,255,.55);}
+
+/* ============ EMPLOYERS ============ */
+.employers{background:var(--offwhite);}
+.employer-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:50px; align-items:flex-start;}
+@media (max-width:940px){ .employer-grid{grid-template-columns:1fr;} }
+.employer-copy h2{margin-bottom:16px;}
+.employer-copy p{color:var(--gray); font-size:.95rem; margin-bottom:24px; line-height:1.7;}
+.employer-points{display:flex; flex-direction:column; gap:14px;}
+.employer-points div{display:flex; gap:12px; align-items:flex-start; font-size:.85rem; color:var(--ink);}
+.employer-points i{color:var(--gold); margin-top:3px;}
+
+/* ============ FORMS (shared) ============ */
+.form-card{background:var(--white); border:1px solid var(--border); border-radius:10px; padding:32px;}
+.form-section-label{font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.1em; font-size:.7rem; color:var(--gold); font-weight:600; margin:24px 0 14px; padding-top:14px; border-top:1px solid var(--border);}
+.form-section-label:first-child{margin-top:0; padding-top:0; border-top:none;}
+.form-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+@media (max-width:640px){ .form-grid{grid-template-columns:1fr;} }
+.field{display:flex; flex-direction:column; gap:7px;}
+.field.full{grid-column:1/-1;}
+.field label{font-size:.78rem; font-weight:600; color:var(--navy);}
+.field label .req{color:var(--red);}
+.field input, .field select, .field textarea{
+  background:var(--offwhite); border:1px solid var(--border); border-radius:5px; padding:12px 14px; font-size:.86rem; color:var(--ink);
+  transition:border-color .25s, box-shadow .25s;
+}
+.field input:focus, .field select:focus, .field textarea:focus{border-color:var(--gold); box-shadow:0 0 0 3px rgba(198,161,91,.15); outline:none; background:var(--white);}
+.field textarea{resize:vertical; min-height:90px;}
+.field .err-text{font-size:.72rem; color:var(--red); display:none;}
+.field.invalid input, .field.invalid select, .field.invalid textarea{border-color:var(--red);}
+.field.invalid .err-text{display:block;}
+.file-field{
+  border:1.5px dashed var(--border); border-radius:6px; padding:16px; text-align:center; cursor:pointer; transition:all .25s; font-size:.78rem; color:var(--gray);
+  position:relative;
+}
+.file-field:hover{border-color:var(--gold); background:rgba(198,161,91,.04);}
+.file-field i{display:block; font-size:1.1rem; margin-bottom:6px; color:var(--gold);}
+.file-field input[type=file]{position:absolute; inset:0; opacity:0; cursor:pointer;}
+.file-field.has-file{border-color:var(--green); color:var(--green); border-style:solid;}
+.form-note{font-size:.76rem; color:var(--gray); margin-top:18px; display:flex; gap:8px; align-items:flex-start;}
+.form-note i{color:var(--gold); margin-top:2px;}
+.success-box{
+  text-align:center; padding:50px 30px; background:var(--white); border:1px solid var(--border); border-radius:10px;
+}
+.success-box i{font-size:2.6rem; color:var(--green); margin-bottom:18px; display:block;}
+.success-box h3{font-family:var(--font-display); font-size:1.4rem; color:var(--navy); margin-bottom:10px;}
+.success-box p{color:var(--gray); font-size:.9rem; max-width:440px; margin:0 auto;}
+
+/* ============ APPLY SECTION ============ */
+.apply{background:var(--white);}
+
+/* ============ RECENT CANDIDATES (public, anonymized) ============ */
+.candidates-strip{background:var(--offwhite);}
+.candidates-table-wrap{background:var(--white); border:1px solid var(--border); border-radius:8px; overflow-x:auto;}
+table.candidates-table{width:100%; border-collapse:collapse; min-width:600px;}
+.candidates-table th, .candidates-table td{padding:13px 16px; text-align:left; border-bottom:1px solid var(--border); font-size:.83rem;}
+.candidates-table th{font-family:var(--font-mono); text-transform:uppercase; font-size:.66rem; letter-spacing:.05em; color:var(--gray); background:var(--offwhite);}
+.candidates-table tr:last-child td{border-bottom:none;}
+.candidates-table td:first-child{font-family:var(--font-mono); color:var(--gold); font-weight:600;}
+
+/* ============ CONTACT ============ */
+.contact{background:var(--offwhite);}
+.contact-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:50px;}
+@media (max-width:940px){ .contact-grid{grid-template-columns:1fr;} }
+.contact-person{background:var(--navy); color:var(--white); border-radius:10px; padding:26px; margin-bottom:16px;}
+.contact-person h5{font-family:var(--font-display); font-size:1.1rem; margin-bottom:4px;}
+.contact-person .role{font-family:var(--font-mono); font-size:.68rem; color:var(--gold); text-transform:uppercase; letter-spacing:.06em; margin-bottom:16px; display:block;}
+.contact-actions{display:flex; gap:10px; flex-wrap:wrap;}
+.contact-actions a{
+  flex:1; text-align:center; justify-content:center; padding:11px 14px; border-radius:5px; font-size:.78rem; font-weight:700; display:flex; align-items:center; gap:7px;
+}
+.call-btn{background:var(--gold); color:var(--navy);}
+.wa-btn{background:#25D366; color:#fff;}
+.contact-email-card{background:var(--white); border:1px solid var(--border); border-radius:10px; padding:22px 26px; display:flex; align-items:center; gap:16px;}
+.contact-email-card i{font-size:1.3rem; color:var(--gold);}
+.contact-email-card b{display:block; font-size:.9rem; color:var(--navy);}
+.contact-email-card span{font-size:.78rem; color:var(--gray);}
+
+/* ============ FOOTER ============ */
+footer{background:var(--navy); color:rgba(255,255,255,.7); padding:64px 0 26px;}
+.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:40px; margin-bottom:46px;}
+@media (max-width:860px){ .footer-grid{grid-template-columns:1fr 1fr; gap:36px;} }
+@media (max-width:520px){ .footer-grid{grid-template-columns:1fr;} }
+.footer-brand p{font-size:.85rem; margin:16px 0 20px; max-width:280px; color:rgba(255,255,255,.55);}
+.footer-social{display:flex; gap:10px;}
+.footer-social a{width:36px; height:36px; border-radius:50%; border:1px solid var(--border-navy); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.3); font-size:.8rem;}
+.footer-col h5{font-family:var(--font-display); font-weight:600; font-size:.9rem; margin-bottom:16px; color:var(--white);}
+.footer-col ul{display:grid; gap:9px;}
+.footer-col a{font-size:.83rem; color:rgba(255,255,255,.55); transition:color .25s;}
+.footer-col a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid var(--border-navy); padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:.76rem; color:rgba(255,255,255,.4);}
+
+.float-actions{position:fixed; right:20px; bottom:20px; display:flex; flex-direction:column; gap:12px; z-index:90;}
+.float-actions a{width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.2rem; color:#fff; box-shadow:0 10px 26px -10px rgba(0,0,0,.5);}
+.float-wa{background:#25D366;}
+.float-call{background:var(--gold); color:var(--navy);}
+
+/* ============ MODAL ============ */
+.modal-overlay{position:fixed; inset:0; background:rgba(11,30,61,.6); backdrop-filter:blur(4px); z-index:300; display:none; align-items:center; justify-content:center; padding:20px; overflow-y:auto;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--white); border-radius:10px; max-width:640px; width:100%; max-height:88vh; overflow-y:auto; padding:32px; position:relative;}
+.modal-box.wide{max-width:840px;}
+.modal-close{position:absolute; top:18px; right:18px; width:34px; height:34px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--gray);}
+.modal-close:hover{background:var(--offwhite); color:var(--navy);}
+
+/* ============ TOAST ============ */
+.toast{position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--navy); color:var(--white); padding:14px 24px; border-radius:8px; font-size:.85rem; display:flex; align-items:center; gap:10px; z-index:400; opacity:0; pointer-events:none; transition:all .35s var(--ease); box-shadow:0 20px 40px -14px rgba(0,0,0,.4);}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto;}
+.toast i{color:var(--green);}
+
+/* ============ ADMIN PANEL ============ */
+.admin-view{position:fixed; inset:0; background:var(--offwhite); z-index:500; display:none; overflow-y:auto;}
+.admin-view.open{display:block;}
+.admin-login-wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; background:var(--navy);}
+.admin-login-box{background:var(--white); border-radius:10px; padding:40px; max-width:400px; width:100%;}
+.admin-login-box .logo{justify-content:center; margin-bottom:22px;}
+.admin-login-box .logo-mark{border-color:var(--navy); color:var(--navy);}
+.admin-login-box .logo-text{color:var(--navy);}
+.admin-login-box .logo-text span{color:var(--gold);}
+.admin-login-box h3{font-family:var(--font-display); text-align:center; margin-bottom:6px; color:var(--navy); font-size:1.2rem;}
+.admin-login-box p.sub{text-align:center; color:var(--gray); font-size:.82rem; margin-bottom:24px;}
+.demo-cred-box{background:var(--offwhite); border:1px dashed var(--border); border-radius:6px; padding:12px 14px; font-family:var(--font-mono); font-size:.72rem; color:var(--gray); margin-bottom:20px; line-height:1.7;}
+.demo-cred-box b{color:var(--navy);}
+.admin-login-error{color:var(--red); font-size:.78rem; margin-top:8px; display:none;}
+
+.admin-shell{display:none; min-height:100vh; grid-template-columns:230px 1fr;}
+.admin-shell.active{display:grid;}
+.admin-sidebar{background:var(--navy); color:var(--white); padding:22px 16px; display:flex; flex-direction:column;}
+.admin-sidebar .logo{margin-bottom:26px;}
+.admin-nav-item{display:flex; align-items:center; gap:10px; padding:11px 12px; border-radius:6px; font-size:.83rem; color:rgba(255,255,255,.65); margin-bottom:2px; width:100%; text-align:left;}
+.admin-nav-item i{width:16px;}
+.admin-nav-item:hover{background:rgba(255,255,255,.06); color:var(--white);}
+.admin-nav-item.active{background:var(--gold); color:var(--navy); font-weight:700;}
+.admin-logout{margin-top:auto; padding-top:16px; border-top:1px solid var(--border-navy);}
+.admin-main{padding:30px 34px; overflow-x:hidden;}
+.admin-topbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:26px; flex-wrap:wrap; gap:12px;}
+.admin-topbar h2{font-family:var(--font-display); color:var(--navy); font-size:1.4rem;}
+.admin-panel-view{display:none;}
+.admin-panel-view.active{display:block;}
+
+.stat-cards{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:30px;}
+@media (max-width:900px){ .stat-cards{grid-template-columns:repeat(2,1fr);} }
+.stat-card{background:var(--white); border:1px solid var(--border); border-radius:8px; padding:20px;}
+.stat-card b{font-family:var(--font-display); font-size:1.8rem; color:var(--navy); display:block;}
+.stat-card span{font-size:.76rem; color:var(--gray); font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.04em;}
+.stat-split{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:30px;}
+@media (max-width:800px){ .stat-split{grid-template-columns:1fr;} }
+.split-card{background:var(--white); border:1px solid var(--border); border-radius:8px; padding:20px;}
+.split-card h4{font-family:var(--font-mono); text-transform:uppercase; font-size:.7rem; letter-spacing:.06em; color:var(--gray); margin-bottom:14px;}
+.split-row{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border); font-size:.84rem;}
+.split-row:last-child{border-bottom:none;}
+.split-row b{color:var(--gold); font-family:var(--font-mono);}
+
+.admin-table-wrap{background:var(--white); border:1px solid var(--border); border-radius:8px; overflow-x:auto;}
+table.admin-table{width:100%; border-collapse:collapse; min-width:760px;}
+.admin-table th, .admin-table td{padding:13px 14px; text-align:left; border-bottom:1px solid var(--border); font-size:.82rem;}
+.admin-table th{font-family:var(--font-mono); text-transform:uppercase; font-size:.66rem; letter-spacing:.05em; color:var(--gray); background:var(--offwhite);}
+.admin-table tr:last-child td{border-bottom:none;}
+.status-pill{font-family:var(--font-mono); font-size:.66rem; text-transform:uppercase; padding:4px 9px; border-radius:20px; font-weight:600;}
+.status-pill.published, .status-pill.new{background:rgba(28,138,91,.1); color:var(--green);}
+.status-pill.unpublished, .status-pill.rejected{background:rgba(193,68,60,.1); color:var(--red);}
+.status-pill.review{background:rgba(198,161,91,.15); color:var(--gold);}
+.status-pill.shortlisted, .status-pill.interview{background:rgba(11,30,61,.08); color:var(--navy);}
+.status-pill.selected{background:rgba(28,138,91,.15); color:var(--green);}
+.icon-btn{width:30px; height:30px; border-radius:6px; border:1px solid var(--border); display:inline-flex; align-items:center; justify-content:center; color:var(--gray); font-size:.78rem; margin-right:4px; transition:all .2s;}
+.icon-btn:hover{background:var(--navy); color:var(--white); border-color:var(--navy);}
+.icon-btn.danger:hover{background:var(--red); border-color:var(--red);}
+.admin-toolbar{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; align-items:center;}
+.admin-toolbar input, .admin-toolbar select{background:var(--white); border:1px solid var(--border); border-radius:5px; padding:9px 12px; font-size:.8rem;}
+.mini-note{font-size:.76rem; color:var(--gray); background:var(--white); border:1px dashed var(--border); border-radius:6px; padding:12px 14px; margin-bottom:18px;}
+
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER / NAV ============ -->
+<header id="siteHeader">
+  <div class="container nav-wrap">
+    <a href="#home" class="logo">
+      <div class="logo-mark">PB</div>
+      <div class="logo-text">PAK BOLAN<span>INTERNATIONAL</span></div>
+    </a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active" data-nav>Home</a></li>
+        <li><a href="#about" data-nav>About Us</a></li>
+        <li><a href="#vacancies" data-nav>Vacancies</a></li>
+        <li><a href="#candidates" data-nav>Candidates</a></li>
+        <li><a href="#apply" data-nav>Apply</a></li>
+        <li><a href="#employers" data-nav>Employers</a></li>
+        <li><a href="#process" data-nav>Recruitment Process</a></li>
+        <li><a href="#contact" data-nav>Contact</a></li>
+        <li><a href="#" id="adminNavLink" class="admin-link"><i class="fa-solid fa-lock"></i> Admin</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="#vacancies" class="btn btn-outline btn-sm">View Jobs</a>
+      <a href="#apply" class="btn btn-gold btn-sm">Apply Now</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-map" aria-hidden="true">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+      <path id="path1" class="flight-path" d="M100 600 Q 400 300 700 420 T 1150 250"/>
+      <path id="path2" class="flight-path" d="M-50 200 Q 300 500 650 350 T 1250 550"/>
+      <circle cx="100" cy="600" r="3" fill="#c6a15b"/>
+      <circle cx="1150" cy="250" r="3" fill="#c6a15b"/>
+      <circle cx="650" cy="350" r="3" fill="#c6a15b"/>
+      <g class="flight-plane">
+        <text font-size="16" fill="#c6a15b"><textPath href="#path1" startOffset="0%">✈</textPath></text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="container">
+    <div class="hero-content" data-aos>
+      <div class="hero-eyebrow"><i class="fa-solid fa-globe"></i> Overseas Employment Promoters · Pakistan</div>
+      <h1 class="hero-title">Your Gateway to <em>Global</em> Career Opportunities</h1>
+      <p class="hero-sub">Connecting skilled Pakistani professionals and workers with employment opportunities around the world.</p>
+      <div class="hero-ctas">
+        <a href="#vacancies" class="btn btn-gold"><i class="fa-solid fa-briefcase"></i> View Vacancies</a>
+        <a href="#apply" class="btn btn-outline"><i class="fa-solid fa-file-arrow-up"></i> Apply Now</a>
+        <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-phone"></i> Contact Us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b id="statVacancies">—</b><span>Open Vacancies</span></div>
+        <div class="hero-stat"><b id="statCountries">—</b><span>Destination Countries</span></div>
+        <div class="hero-stat"><b>1000+</b><span>Workers Placed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="section-head center">
+      <div class="eyebrow" style="justify-content:center;">Who We Are</div>
+      <h2 class="section-title">A trusted bridge to <em>overseas</em> employment</h2>
+      <p class="section-sub">PAK BOLAN INTERNATIONAL connects qualified Pakistani workers — skilled, semi-skilled, and professional — with genuine overseas employment opportunities, guiding every candidate through a transparent, structured recruitment process.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card card-white" data-aos><i class="fa-solid fa-building-flag"></i><h4>Who We Are</h4><p>An overseas employment promotion agency based in Pakistan, working directly with international employers to fill genuine manpower requirements.</p></div>
+      <div class="about-card card-white" data-aos><i class="fa-solid fa-bullseye"></i><h4>Our Mission</h4><p>To connect capable Pakistani workers with fair, verified overseas job opportunities through an honest and transparent process.</p></div>
+      <div class="about-card card-white" data-aos><i class="fa-solid fa-eye"></i><h4>Our Vision</h4><p>To be a leading name in Pakistan's overseas recruitment sector, known for integrity and candidate care.</p></div>
+      <div class="about-card card-white" data-aos><i class="fa-solid fa-route"></i><h4>Recruitment Process</h4><p>A structured, step-by-step journey from application to deployment — outlined in full further down this page.</p></div>
+    </div>
+
+    <div class="why-row">
+      <div class="why-visual" data-aos>
+        <div style="width:100%;height:100%;background:linear-gradient(160deg,#1c3a6b,#0b1e3d);display:flex;align-items:center;justify-content:center;">
+          <i class="fa-solid fa-people-group" style="font-size:3rem;color:rgba(198,161,91,.35);"></i>
+        </div>
+        <div class="why-visual-badge"><b>1000+</b><span>Workers Placed Overseas</span></div>
+      </div>
+      <div data-aos>
+        <div class="eyebrow">Why Choose Us</div>
+        <h2 class="section-title" style="margin-bottom:26px; font-size:clamp(1.6rem,3.4vw,2.2rem);">What sets our recruitment process apart</h2>
+        <div class="why-list">
+          <div class="why-item"><span class="num">01</span><div><h5>Direct Employer Coordination</h5><p>We work directly with overseas employers to understand genuine manpower needs.</p></div></div>
+          <div class="why-item"><span class="num">02</span><div><h5>Transparent Process</h5><p>Candidates are kept informed at every stage — screening, shortlisting, interview, and deployment.</p></div></div>
+          <div class="why-item"><span class="num">03</span><div><h5>Candidate Support</h5><p>Our team assists with documentation and preparation throughout the recruitment journey.</p></div></div>
+          <div class="why-item"><span class="num">04</span><div><h5>Wide Professional Network</h5><p>Opportunities spanning skilled trades, technical professions, and general labor categories.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VACANCIES ============ -->
+<section class="vacancies" id="vacancies">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Live Vacancies</div>
+      <h2 class="section-title">Latest Job <em>Vacancies</em></h2>
+      <p class="section-sub">Current openings from our partner employers abroad. New vacancies are added regularly by our recruitment team.</p>
+    </div>
+
+    <div class="vac-toolbar">
+      <input type="text" id="vacSearch" placeholder="Search job title, employer, or keyword…">
+      <select id="vacCountryFilter"><option value="">All Countries</option></select>
+      <select id="vacCategoryFilter"><option value="">All Categories</option></select>
+      <select id="vacExpFilter">
+        <option value="">Any Experience</option>
+        <option value="0">Fresher / No Experience</option>
+        <option value="1">1+ Years</option>
+        <option value="3">3+ Years</option>
+        <option value="5">5+ Years</option>
+      </select>
+      <select id="vacSort">
+        <option value="latest">Sort: Latest</option>
+        <option value="salary-high">Sort: Salary (High to Low)</option>
+        <option value="deadline">Sort: Closing Soon</option>
+      </select>
+    </div>
+    <div class="vac-count" id="vacCount"></div>
+    <div class="vac-grid" id="vacGrid"></div>
+  </div>
+</section>
+
+<!-- ============ COUNTRIES ============ -->
+<section class="countries" id="countries">
+  <div class="container">
+    <div class="section-head center on-navy">
+      <div class="eyebrow" style="justify-content:center;">Destinations</div>
+      <h2 class="section-title">Where our candidates <em>work</em></h2>
+      <p class="section-sub">Click a country to see current vacancies there.</p>
+    </div>
+    <div class="country-grid" id="countryGrid"></div>
+  </div>
+</section>
+
+<!-- ============ PROFESSIONS ============ -->
+<section class="professions" id="professions">
+  <div class="container">
+    <div class="section-head center">
+      <div class="eyebrow" style="justify-content:center;">Job Categories</div>
+      <h2 class="section-title">Professions we <em>recruit</em> for</h2>
+    </div>
+    <div class="prof-grid" id="profGrid"></div>
+  </div>
+</section>
+
+<!-- ============ RECRUITMENT PROCESS ============ -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-head center on-navy">
+      <div class="eyebrow" style="justify-content:center;">How It Works</div>
+      <h2 class="section-title">Your <em>recruitment</em> journey</h2>
+      <p class="section-sub">Eight steps from application to deployment.</p>
+    </div>
+    <div class="process-track">
+      <div class="process-step glass-navy" data-aos><div class="stepnum">01</div><h5>Submit Application</h5><p>Complete the online form with your details and documents.</p></div>
+      <div class="process-step glass-navy" data-aos><div class="stepnum">02</div><h5>Profile Screening</h5><p>Our team reviews your profile against current vacancies.</p></div>
+      <div class="process-step glass-navy" data-aos><div class="stepnum">03</div><h5>Candidate Shortlisting</h5><p>Matching profiles are shortlisted for employer review.</p></div>
+      <div class="process-step glass-navy" data-aos><div class="stepnum">04</div><h5>Interview / Assessment</h5><p>Shortlisted candidates are contacted for interview.</p></div>
+      <div class="process-step glass-navy" data-aos><div class="stepnum">05</div><h5>Document Verification</h5><p>Passport, CNIC, and certificates are verified.</p></div>
+      <div class="process-step glass-navy" data-aos><div class="stepnum">06</div><h5>Employer Selection</h5><p>The employer confirms final candidate selection.</p></div>
+      <div class="process-step glass-navy" data-aos><div class="stepnum">07</div><h5>Visa / Documentation</h5><p>Visa processing and travel documentation begins.</p></div>
+      <div class="process-step glass-navy" data-aos><div class="stepnum">08</div><h5>Deployment</h5><p>Travel arrangements and overseas deployment.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EMPLOYERS ============ -->
+<section class="employers" id="employers">
+  <div class="container employer-grid">
+    <div class="employer-copy" data-aos>
+      <div class="eyebrow">For Employers</div>
+      <h2 class="section-title">Are you an employer looking for <em>skilled workers</em>?</h2>
+      <p>Tell us about your manpower requirements and our recruitment team will help you find suitable candidates.</p>
+      <div class="employer-points">
+        <div><i class="fa-solid fa-check"></i> Access to a wide pool of skilled and semi-skilled Pakistani workers</div>
+        <div><i class="fa-solid fa-check"></i> Structured screening and shortlisting process</div>
+        <div><i class="fa-solid fa-check"></i> Direct coordination with our recruitment team</div>
+      </div>
+    </div>
+    <form class="form-card" id="employerForm" data-aos>
+      <div class="form-grid">
+        <div class="field"><label>Company Name <span class="req">*</span></label><input type="text" name="companyName" required></div>
+        <div class="field"><label>Contact Person <span class="req">*</span></label><input type="text" name="contactPerson" required></div>
+        <div class="field"><label>Email <span class="req">*</span></label><input type="email" name="email" required></div>
+        <div class="field"><label>Phone <span class="req">*</span></label><input type="tel" name="phone" required></div>
+        <div class="field"><label>Country</label><input type="text" name="country"></div>
+        <div class="field"><label>Required Profession</label><input type="text" name="profession"></div>
+        <div class="field"><label>Number of Workers</label><input type="number" name="workers" min="1"></div>
+        <div class="field"><label>Required Qualification</label><input type="text" name="qualification"></div>
+        <div class="field"><label>Experience Required</label><input type="text" name="experience"></div>
+        <div class="field"><label>Salary</label><input type="text" name="salary"></div>
+        <div class="field full"><label>Benefits</label><input type="text" name="benefits"></div>
+        <div class="field full"><label>Additional Requirements</label><textarea name="notes"></textarea></div>
+      </div>
+      <button type="submit" class="btn btn-navy btn-block" style="margin-top:20px;"><i class="fa-solid fa-paper-plane"></i> Submit Manpower Request</button>
+      <p class="form-note"><i class="fa-solid fa-circle-info"></i> This demo prototype logs your inquiry to the admin dashboard for this session and shows a confirmation. A live deployment would email it to almirahmed638@gmail.com via a secure backend.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ APPLICATION FORM ============ -->
+<section class="apply" id="apply">
+  <div class="container">
+    <div class="section-head center">
+      <div class="eyebrow" style="justify-content:center;">Candidates</div>
+      <h2 class="section-title">Submit Your <em>Application</em></h2>
+      <p class="section-sub">Complete the form below — our recruitment team will review your profile against current opportunities.</p>
+    </div>
+
+    <div style="max-width:820px; margin:0 auto;">
+      <form class="form-card" id="applicationForm">
+        <div class="form-section-label">Personal Information</div>
+        <div class="form-grid">
+          <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" name="fullName" required></div>
+          <div class="field"><label>Father / Husband Name</label><input type="text" name="fatherName"></div>
+          <div class="field"><label>Date of Birth</label><input type="date" name="dob"></div>
+          <div class="field"><label>CNIC Number</label><input type="text" name="cnic" placeholder="00000-0000000-0"><span class="err-text">Format: 00000-0000000-0</span></div>
+          <div class="field"><label>Gender</label><select name="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+          <div class="field"><label>Marital Status</label><select name="maritalStatus"><option value="">Select</option><option>Single</option><option>Married</option></select></div>
+          <div class="field"><label>Nationality</label><input type="text" name="nationality" value="Pakistani"></div>
+          <div class="field"><label>City</label><input type="text" name="city"></div>
+          <div class="field"><label>Province</label><select name="province"><option value="">Select</option><option>Punjab</option><option>Sindh</option><option>Khyber Pakhtunkhwa</option><option>Balochistan</option><option>Gilgit-Baltistan</option><option>Azad Kashmir</option><option>Islamabad Capital Territory</option></select></div>
+          <div class="field"><label>Mobile Number <span class="req">*</span></label><input type="tel" name="mobile" placeholder="03XXXXXXXXX" required></div>
+          <div class="field"><label>WhatsApp Number</label><input type="tel" name="whatsapp" placeholder="03XXXXXXXXX"></div>
+          <div class="field"><label>Email Address</label><input type="email" name="email"></div>
+        </div>
+
+        <div class="form-section-label">Professional Information</div>
+        <div class="form-grid">
+          <div class="field"><label>Profession <span class="req">*</span></label><input type="text" name="profession" required></div>
+          <div class="field"><label>Job Category</label><select name="jobCategory" id="applyCategorySelect"><option value="">Select</option></select></div>
+          <div class="field"><label>Qualification</label><input type="text" name="qualification"></div>
+          <div class="field"><label>Total Experience</label><input type="text" name="totalExperience" placeholder="e.g. 5 years"></div>
+          <div class="field"><label>Overseas Experience</label><input type="text" name="overseasExperience"></div>
+          <div class="field"><label>Current Employer</label><input type="text" name="currentEmployer"></div>
+          <div class="field"><label>Current Job Title</label><input type="text" name="currentJobTitle"></div>
+          <div class="field"><label>Preferred Country</label><select name="preferredCountry" id="applyCountrySelect"><option value="">Select</option></select></div>
+          <div class="field"><label>Preferred Job</label><input type="text" name="preferredJob" id="preferredJobInput"></div>
+          <div class="field"><label>Expected Salary</label><input type="text" name="expectedSalary"></div>
+        </div>
+
+        <div class="form-section-label">Documents</div>
+        <div class="form-grid">
+          <div class="field"><label>CV / Resume <span class="req">*</span></label>
+            <div class="file-field" data-filefield><i class="fa-solid fa-file-arrow-up"></i><span class="file-label">PDF/DOC, max 5MB</span><input type="file" name="cv" accept=".pdf,.doc,.docx" required></div>
+          </div>
+          <div class="field"><label>Passport (if available)</label>
+            <div class="file-field" data-filefield><i class="fa-solid fa-file-arrow-up"></i><span class="file-label">PDF/JPG, max 5MB</span><input type="file" name="passport" accept=".pdf,.jpg,.jpeg,.png"></div>
+          </div>
+          <div class="field"><label>CNIC (optional)</label>
+            <div class="file-field" data-filefield><i class="fa-solid fa-file-arrow-up"></i><span class="file-label">PDF/JPG, max 5MB</span><input type="file" name="cnicFile" accept=".pdf,.jpg,.jpeg,.png"></div>
+          </div>
+          <div class="field"><label>Photograph (optional)</label>
+            <div class="file-field" data-filefield><i class="fa-solid fa-image"></i><span class="file-label">JPG/PNG, max 2MB</span><input type="file" name="photo" accept=".jpg,.jpeg,.png"></div>
+          </div>
+          <div class="field full"><label>Other Documents</label>
+            <div class="file-field" data-filefield><i class="fa-solid fa-paperclip"></i><span class="file-label">Optional — certificates, experience letters</span><input type="file" name="otherDocs" multiple></div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-gold btn-block" style="margin-top:22px;"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
+        <p class="form-note"><i class="fa-solid fa-circle-info"></i> Only Full Name, Mobile Number, Profession, and CV are required — everything else is optional and can be added later.</p>
+        <p class="form-note"><i class="fa-solid fa-shield-halved"></i> File uploads are validated in your browser (type &amp; size) for this demo. Real document storage and secure server-side handling require a backend — not connected in this prototype.</p>
+      </form>
+      <div class="success-box" id="applicationSuccess" style="display:none;">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Application Received</h3>
+        <p>Thank you for submitting your application. Our recruitment team will review your information and contact you if your profile matches an available opportunity.</p>
+        <button class="btn btn-outline-navy" style="margin-top:22px;" id="applyAnotherBtn">Submit Another Application</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECENT CANDIDATES (anonymized, public-safe) ============ -->
+<section class="candidates-strip" id="candidates">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Candidate Database</div>
+      <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem);">Recently Registered <em>Candidates</em></h2>
+      <p class="section-sub">A snapshot of recent applicants. Full candidate profiles — name, contact details, and documents — are kept private and are only visible to our recruitment team and verified employers.</p>
+    </div>
+    <div class="candidates-table-wrap">
+      <table class="candidates-table">
+        <thead><tr><th>Reference</th><th>Profession</th><th>Preferred Country</th><th>Experience</th><th>Registered</th></tr></thead>
+        <tbody id="publicCandidatesTable"></tbody>
+      </table>
+    </div>
+    <p class="form-note" style="margin-top:14px;"><i class="fa-solid fa-lock"></i> Are you an employer wanting to review full candidate profiles? <a href="#employers" style="color:var(--gold); font-weight:700;">Submit a manpower request</a> and our team will share matching profiles directly.</p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="container contact-grid">
+    <div data-aos>
+      <div class="eyebrow">Get In Touch</div>
+      <h2 class="section-title" style="margin-bottom:26px;">Contact <em>Us</em></h2>
+      <div class="contact-person">
+        <h5>Sardar M Ishaq Khan</h5><span class="role">Overseas Employment Promoter</span>
+        <div class="contact-actions">
+          <a href="tel:+923028202273" class="call-btn"><i class="fa-solid fa-phone"></i> Call · 0302-8202273</a>
+          <a href="https://wa.me/923028202273" target="_blank" rel="noopener" class="wa-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
+      <div class="contact-person">
+        <h5>Muhammad Shakeel Khan</h5><span class="role">Overseas Employment Promoter</span>
+        <div class="contact-actions">
+          <a href="tel:+923008202273" class="call-btn"><i class="fa-solid fa-phone"></i> Call · 0300-8202273</a>
+          <a href="https://wa.me/923008202273" target="_blank" rel="noopener" class="wa-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
+      <div class="contact-email-card">
+        <i class="fa-solid fa-envelope"></i>
+        <div><b>almirahmed638@gmail.com</b><span>Applications &amp; general inquiries</span></div>
+      </div>
+    </div>
+
+    <form class="form-card" id="contactForm" data-aos>
+      <div class="form-grid">
+        <div class="field"><label>Full Name <span class="req">*</span></label><input type="text" name="name" required></div>
+        <div class="field"><label>Phone <span class="req">*</span></label><input type="tel" name="phone" required></div>
+        <div class="field full"><label>Email <span class="req">*</span></label><input type="email" name="email" required></div>
+        <div class="field full"><label>Message <span class="req">*</span></label><textarea name="message" required></textarea></div>
+      </div>
+      <button type="submit" class="btn btn-navy btn-block" style="margin-top:18px;"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+    </form>
+  </div>
+</section>
+
+<div class="float-actions">
+  <a href="https://wa.me/923028202273" target="_blank" rel="noopener" class="float-wa" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  <a href="tel:+923028202273" class="float-call" aria-label="Call"><i class="fa-solid fa-phone"></i></a>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><div class="logo-mark">PB</div><div class="logo-text">PAK BOLAN<span>INTERNATIONAL</span></div></div>
+        <p>Connecting talent with global opportunities.</p>
+        <div class="footer-social">
+          <a href="#" title="Not yet configured — add from admin panel"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" title="Not yet configured — add from admin panel"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" title="Not yet configured — add from admin panel"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#vacancies">Vacancies</a></li><li><a href="#apply">Apply</a></li></ul></div>
+      <div class="footer-col"><h5>More</h5><ul><li><a href="#employers">Employers</a></li><li><a href="#contact">Contact</a></li><li><a href="#" id="footerPrivacy">Privacy Policy</a></li><li><a href="#" id="footerTerms">Terms &amp; Conditions</a></li></ul></div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li>Sardar M Ishaq Khan<br>0302-8202273</li>
+          <li>Muhammad Shakeel Khan<br>0300-8202273</li>
+          <li>almirahmed638@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PAK BOLAN INTERNATIONAL. All Rights Reserved.</span>
+      <span>Overseas Employment Promoters — Pakistan</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i><span id="toastText"></span></div>
+
+<!-- ============ VACANCY DETAIL MODAL ============ -->
+<div class="modal-overlay" id="vacModal">
+  <div class="modal-box wide">
+    <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+    <div id="vacModalBody"></div>
+  </div>
+</div>
+
+<!-- ============ GENERIC INFO MODAL (privacy/terms) ============ -->
+<div class="modal-overlay" id="infoModal">
+  <div class="modal-box">
+    <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+    <div id="infoModalBody"></div>
+  </div>
+</div>
+
+<!-- ============ ADMIN VIEW ============ -->
+<div class="admin-view" id="adminView">
+
+  <!-- Login -->
+  <div class="admin-login-wrap" id="adminLoginWrap">
+    <div class="admin-login-box">
+      <div class="logo"><div class="logo-mark">PB</div><div class="logo-text">PAK BOLAN<span>INTERNATIONAL</span></div></div>
+      <h3>Admin Dashboard</h3>
+      <p class="sub">Staff login</p>
+      <div class="demo-cred-box" id="loginNoticeBox">
+        Log in with the admin email/password you created in Supabase (Authentication &gt; Users).
+      </div>
+      <form id="adminLoginForm">
+        <div class="field" style="margin-bottom:14px;"><label>Email</label><input type="email" id="adminUser" autocomplete="username"></div>
+        <div class="field" style="margin-bottom:6px;"><label>Password</label><input type="password" id="adminPass" autocomplete="current-password"></div>
+        <div class="admin-login-error" id="adminLoginError">Incorrect email or password.</div>
+        <button type="submit" class="btn btn-navy btn-block" style="margin-top:18px;" id="adminLoginSubmit">Log In</button>
+      </form>
+      <button class="btn btn-outline-navy btn-block" style="margin-top:10px;" id="adminBackToSite"><i class="fa-solid fa-arrow-left"></i> Back to Website</button>
+    </div>
+  </div>
+
+  <!-- Dashboard shell -->
+  <div class="admin-shell" id="adminShell">
+    <aside class="admin-sidebar">
+      <div class="logo"><div class="logo-mark" style="border-color:var(--gold); color:var(--gold);">PB</div><div class="logo-text">PAK BOLAN<span>ADMIN PANEL</span></div></div>
+      <button class="admin-nav-item active" data-admin-view="dashboard"><i class="fa-solid fa-gauge"></i> Dashboard</button>
+      <button class="admin-nav-item" data-admin-view="vacancies"><i class="fa-solid fa-briefcase"></i> Vacancy Management</button>
+      <button class="admin-nav-item" data-admin-view="applications"><i class="fa-solid fa-file-lines"></i> Applications</button>
+      <button class="admin-nav-item" data-admin-view="employerInquiries"><i class="fa-solid fa-handshake"></i> Employer Inquiries</button>
+      <button class="admin-nav-item" data-admin-view="content"><i class="fa-solid fa-list-check"></i> Countries &amp; Categories</button>
+      <button class="admin-nav-item" data-admin-view="backup"><i class="fa-solid fa-cloud-arrow-down"></i> Data &amp; Backup</button>
+      <div class="admin-logout">
+        <button class="admin-nav-item" id="adminGoToSite"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Website</button>
+        <button class="admin-nav-item" id="adminLogoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <!-- DASHBOARD -->
+      <div class="admin-panel-view active" data-panel="dashboard">
+        <div class="admin-topbar"><h2>Dashboard</h2></div>
+        <div class="stat-cards" id="adminStatCards"></div>
+        <div class="stat-split">
+          <div class="split-card"><h4>Candidates by Country</h4><div id="statByCountry"></div></div>
+          <div class="split-card"><h4>Candidates by Profession</h4><div id="statByProfession"></div></div>
+        </div>
+      </div>
+
+      <!-- VACANCY MANAGEMENT -->
+      <div class="admin-panel-view" data-panel="vacancies">
+        <div class="admin-topbar"><h2>Vacancy Management</h2><button class="btn btn-gold btn-sm" id="addVacancyBtn"><i class="fa-solid fa-plus"></i> Add Vacancy</button></div>
+        <div class="mini-note"><i class="fa-solid fa-circle-info"></i> Changes here update the public Vacancies section immediately in this browser session. Real persistence across reloads/visitors needs a live database backend.</div>
+        <div class="admin-toolbar"><input type="text" id="adminVacSearch" placeholder="Search vacancies…" style="min-width:240px;"></div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Title</th><th>Country</th><th>Positions</th><th>Status</th><th>Tags</th><th>Deadline</th><th>Actions</th></tr></thead>
+            <tbody id="adminVacTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- APPLICATIONS -->
+      <div class="admin-panel-view" data-panel="applications">
+        <div class="admin-topbar"><h2>Applications</h2><button class="btn btn-outline-navy btn-sm" id="exportAppsBtn"><i class="fa-solid fa-download"></i> Export CSV</button></div>
+        <div class="admin-toolbar">
+          <input type="text" id="adminAppSearch" placeholder="Search candidate name, profession…" style="min-width:240px;">
+          <select id="adminAppStatusFilter">
+            <option value="">All Statuses</option>
+            <option>New</option><option>Under Review</option><option>Shortlisted</option><option>Interview</option><option>Selected</option><option>Rejected</option>
+          </select>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Candidate</th><th>Profession</th><th>Preferred Country</th><th>Applied</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="adminAppTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- EMPLOYER INQUIRIES -->
+      <div class="admin-panel-view" data-panel="employerInquiries">
+        <div class="admin-topbar"><h2>Employer Inquiries</h2></div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Company</th><th>Contact</th><th>Country</th><th>Workers Needed</th><th>Submitted</th><th></th></tr></thead>
+            <tbody id="adminEmployerTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CONTENT (countries/categories) -->
+      <div class="admin-panel-view" data-panel="content">
+        <div class="admin-topbar"><h2>Countries &amp; Categories</h2></div>
+        <div class="stat-split">
+          <div class="split-card">
+            <h4>Destination Countries</h4>
+            <div id="adminCountryList" style="margin-bottom:14px;"></div>
+            <div style="display:flex; gap:8px;"><input type="text" id="newCountryInput" placeholder="Country name" style="flex:1; border:1px solid var(--border); border-radius:5px; padding:8px 10px; font-size:.8rem;"><button class="btn btn-navy btn-sm" id="addCountryBtn">Add</button></div>
+          </div>
+          <div class="split-card">
+            <h4>Job Categories</h4>
+            <div id="adminCategoryList" style="margin-bottom:14px;"></div>
+            <div style="display:flex; gap:8px;"><input type="text" id="newCategoryInput" placeholder="Category name" style="flex:1; border:1px solid var(--border); border-radius:5px; padding:8px 10px; font-size:.8rem;"><button class="btn btn-navy btn-sm" id="addCategoryBtn">Add</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DATA & BACKUP -->
+      <div class="admin-panel-view" data-panel="backup">
+        <div class="admin-topbar"><h2>Data &amp; Backup</h2></div>
+
+        <div class="split-card" style="margin-bottom:20px;">
+          <h4>Database Connection</h4>
+          <div id="storageStatusBox" style="font-size:.85rem; color:var(--ink); line-height:1.7;"></div>
+        </div>
+
+        <div class="split-card" style="margin-bottom:20px;">
+          <h4>Excel Workbook Export</h4>
+          <p style="font-size:.83rem; color:var(--gray); margin-bottom:14px;">Download a single .xlsx file with three sheets — Vacancies, Applications, and Employer Inquiries — reflecting the current live data from your database.</p>
+          <button class="btn btn-gold btn-sm" id="exportWorkbookBtn"><i class="fa-solid fa-file-excel"></i> Download Excel Workbook (.xlsx)</button>
+        </div>
+
+        <div class="split-card">
+          <h4>Live Spreadsheet Sync <span id="liveSyncSupportTag" class="mini-tag sample" style="margin-left:6px;"></span></h4>
+          <p style="font-size:.83rem; color:var(--gray); margin-bottom:14px;" id="liveSyncDesc"></p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <button class="btn btn-navy btn-sm" id="connectBackupFolderBtn"><i class="fa-solid fa-folder-open"></i> Connect Live Backup Folder</button>
+            <span id="backupFolderStatus" style="font-family:var(--font-mono); font-size:.76rem; color:var(--gray);">Not connected</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ============ VACANCY ADD/EDIT MODAL ============ -->
+<div class="modal-overlay" id="vacEditModal">
+  <div class="modal-box wide">
+    <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+    <h3 style="font-family:var(--font-display); color:var(--navy); margin-bottom:20px;" id="vacEditTitle">Add Vacancy</h3>
+    <form id="vacEditForm">
+      <input type="hidden" id="vacEditId">
+      <div class="form-grid">
+        <div class="field"><label>Job Title <span class="req">*</span></label><input type="text" id="vf_title" required></div>
+        <div class="field"><label>Employer / Company</label><input type="text" id="vf_employer"></div>
+        <div class="field"><label>Country <span class="req">*</span></label><select id="vf_country" required></select></div>
+        <div class="field"><label>Category</label><select id="vf_category"></select></div>
+        <div class="field"><label>Positions</label><input type="number" id="vf_positions" min="1" value="1"></div>
+        <div class="field"><label>Salary</label><input type="text" id="vf_salary"></div>
+        <div class="field"><label>Currency</label><input type="text" id="vf_currency" placeholder="e.g. SAR, AED"></div>
+        <div class="field"><label>Contract Duration</label><input type="text" id="vf_duration" placeholder="e.g. 2 Years"></div>
+        <div class="field"><label>Required Experience</label><input type="text" id="vf_experience" placeholder="e.g. 2+ years"></div>
+        <div class="field"><label>Required Qualification</label><input type="text" id="vf_qualification"></div>
+        <div class="field"><label>Age Requirement</label><input type="text" id="vf_age" placeholder="e.g. 21-40"></div>
+        <div class="field"><label>Gender</label><select id="vf_gender"><option value="">Any</option><option>Male</option><option>Female</option></select></div>
+        <div class="field"><label>Deadline</label><input type="date" id="vf_deadline"></div>
+        <div class="field"><label>Accommodation</label><select id="vf_accommodation"><option>Provided</option><option>Not Provided</option></select></div>
+        <div class="field"><label>Food</label><select id="vf_food"><option>Provided</option><option>Not Provided</option></select></div>
+        <div class="field"><label>Transportation</label><select id="vf_transport"><option>Provided</option><option>Not Provided</option></select></div>
+        <div class="field full"><label>Job Description</label><textarea id="vf_description"></textarea></div>
+        <div class="field full"><label>Requirements</label><textarea id="vf_requirements"></textarea></div>
+        <div class="field full"><label>Benefits</label><textarea id="vf_benefits"></textarea></div>
+        <div class="field"><label><input type="checkbox" id="vf_featured" style="width:auto; margin-right:6px;">Mark Featured</label></div>
+        <div class="field"><label><input type="checkbox" id="vf_urgent" style="width:auto; margin-right:6px;">Mark Urgent</label></div>
+        <div class="field"><label>Status</label><select id="vf_status"><option value="published">Published</option><option value="unpublished">Unpublished</option></select></div>
+      </div>
+      <button type="submit" class="btn btn-gold btn-block" style="margin-top:20px;">Save Vacancy</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ APPLICATION DETAIL MODAL ============ -->
+<div class="modal-overlay" id="appDetailModal">
+  <div class="modal-box wide">
+    <button class="modal-close" data-close-modal><i class="fa-solid fa-xmark"></i></button>
+    <div id="appDetailBody"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+
+/* ==========================================================================
+   SUPABASE CONFIG — paste your Project URL and anon public key here.
+   Find them in Supabase: Project Settings > API.
+   ========================================================================== */
+const SUPABASE_URL = 'https://izzqzffytobqpxzzlcjc.supabase.co/rest/v1/';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml6enF6ZmZ5dG9icXB4enpsY2pjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0NDcwNTksImV4cCI6MjEwMjAyMzA1OX0.ZXdXdAKx6I37sjoDPQ82iF3MuO9e4ocSvl9WEC1G86A';
+const supabaseConfigured = !SUPABASE_URL.startsWith('https://izzqzffytobqpxzzlcjc.supabase.co/rest/v1/') && !SUPABASE_ANON_KEY.startsWith('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml6enF6ZmZ5dG9icXB4enpsY2pjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0NDcwNTksImV4cCI6MjEwMjAyMzA1OX0.ZXdXdAKx6I37sjoDPQ82iF3MuO9e4ocSvl9WEC1G86A');
+const supabase = supabaseConfigured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+/* ==========================================================================
+   STATE — the single source of truth is now your Supabase database.
+   `state` here is just a local in-memory mirror used for rendering; every
+   mutation writes to Supabase first, then updates this mirror from the
+   real result (never assumed to have succeeded).
+   ========================================================================== */
+const state = {
+  countries: ['Saudi Arabia','UAE','Qatar','Oman','Bahrain','Kuwait'],
+  categories: ['Engineers','Construction Workers','Electricians','Plumbers','Welders','Drivers','Heavy Drivers','Technicians','Healthcare Professionals','Hospitality Workers','Security Staff','Skilled Workers','Semi-Skilled Workers','General Workers'],
+  countryFlags: {'Saudi Arabia':'🇸🇦','UAE':'🇦🇪','Qatar':'🇶🇦','Oman':'🇴🇲','Bahrain':'🇧🇭','Kuwait':'🇰🇼'},
+  vacancies: [],
+  applications: [],
+  employerInquiries: [],
+  adminAuthed: false,
+  settingsRowExists: false,
+};
+
+/* ---------- DB row <-> app object mapping (DB uses snake_case) ---------- */
+function vacFromRow(r){ return { id:r.id, title:r.title, employer:r.employer, country:r.country, category:r.category, positions:r.positions, salary:r.salary, currency:r.currency, duration:r.duration, experience:r.experience, qualification:r.qualification, age:r.age, gender:r.gender, deadline:r.deadline, accommodation:r.accommodation, food:r.food, transportation:r.transportation, description:r.description, requirements:r.requirements, benefits:r.benefits, status:r.status, featured:r.featured, urgent:r.urgent, createdAt:r.created_at }; }
+function vacToRow(v){ return { title:v.title, employer:v.employer, country:v.country, category:v.category, positions:v.positions, salary:v.salary, currency:v.currency, duration:v.duration, experience:v.experience, qualification:v.qualification, age:v.age, gender:v.gender, deadline: v.deadline || null, accommodation:v.accommodation, food:v.food, transportation:v.transportation, description:v.description, requirements:v.requirements, benefits:v.benefits, status:v.status, featured:v.featured, urgent:v.urgent }; }
+
+function appFromRow(r){ return { id:r.id, fullName:r.full_name, fatherName:r.father_name, dob:r.dob, cnic:r.cnic, gender:r.gender, maritalStatus:r.marital_status, nationality:r.nationality, city:r.city, province:r.province, phone:r.phone, whatsapp:r.whatsapp, email:r.email, profession:r.profession, jobCategory:r.job_category, qualification:r.qualification, experience:r.experience, overseasExperience:r.overseas_experience, currentEmployer:r.current_employer, currentJobTitle:r.current_job_title, preferredCountry:r.preferred_country, preferredJob:r.preferred_job, expectedSalary:r.expected_salary, cvFile:r.cv_file, passportFile:r.passport_file, cnicFile:r.cnic_file, photoFile:r.photo_file, otherDocs:r.other_docs, status:r.status, adminNotes:r.admin_notes, createdAt:r.created_at }; }
+function appToRow(a){ return { full_name:a.fullName, father_name:a.fatherName, dob: a.dob||null, cnic:a.cnic, gender:a.gender, marital_status:a.maritalStatus, nationality:a.nationality, city:a.city, province:a.province, phone:a.phone, whatsapp:a.whatsapp, email:a.email, profession:a.profession, job_category:a.jobCategory, qualification:a.qualification, experience:a.experience, overseas_experience:a.overseasExperience, current_employer:a.currentEmployer, current_job_title:a.currentJobTitle, preferred_country:a.preferredCountry, preferred_job:a.preferredJob, expected_salary:a.expectedSalary, cv_file:a.cvFile, passport_file:a.passportFile, cnic_file:a.cnicFile, photo_file:a.photoFile, other_docs:a.otherDocs, status:a.status, admin_notes:a.adminNotes }; }
+
+function empFromRow(r){ return { id:r.id, companyName:r.company_name, contactPerson:r.contact_person, email:r.email, phone:r.phone, country:r.country, profession:r.profession, workers:r.workers, qualification:r.qualification, experience:r.experience, salary:r.salary, benefits:r.benefits, notes:r.notes, createdAt:r.created_at }; }
+function empToRow(e){ return { company_name:e.companyName, contact_person:e.contactPerson, email:e.email, phone:e.phone, country:e.country, profession:e.profession, workers:e.workers, qualification:e.qualification, experience:e.experience, salary:e.salary, benefits:e.benefits, notes:e.notes }; }
+
+/* ---------- FETCH — pulls current data from the shared database ---------- */
+async function fetchVacancies(){
+  const { data, error } = await supabase.from('vacancies').select('*').order('created_at', { ascending:false });
+  if (error){ console.warn(error); showToast('Could not load vacancies from the database.'); return; }
+  state.vacancies = data.map(vacFromRow);
+}
+async function fetchApplications(){
+  const { data, error } = await supabase.from('applications').select('*').order('created_at', { ascending:false });
+  if (error){ console.warn(error); return; } // non-admin visitors can't read this table (by design) — fails silently for them
+  state.applications = data.map(appFromRow);
+}
+async function fetchEmployerInquiries(){
+  const { data, error } = await supabase.from('employer_inquiries').select('*').order('created_at', { ascending:false });
+  if (error){ console.warn(error); return; }
+  state.employerInquiries = data.map(empFromRow);
+}
+async function fetchSettings(){
+  const { data, error } = await supabase.from('site_settings').select('*').eq('id', 1).maybeSingle();
+  if (error || !data){ console.warn(error); return; }
+  state.settingsRowExists = true;
+  if (data.countries) state.countries = data.countries;
+  if (data.categories) state.categories = data.categories;
+}
+async function saveSettings(){
+  const { error } = await supabase.from('site_settings').update({ countries: state.countries, categories: state.categories }).eq('id', 1);
+  if (error){ console.warn(error); showToast('Could not save — log in as admin first.'); }
+}
+
+async function refreshPublicData(){
+  await Promise.all([fetchVacancies(), fetchSettings()]);
+  populateCountrySelects(); populateCategorySelects();
+  renderVacancies(); renderCountries(); renderProfessions();
+}
+async function refreshAdminData(){
+  await Promise.all([fetchApplications(), fetchEmployerInquiries()]);
+  renderAdminAll();
+}
+
+
+/* ==========================================================================
+   DOM helpers
+   ========================================================================== */
+const $ = (s, ctx) => (ctx||document).querySelector(s);
+const $$ = (s, ctx) => (ctx||document).querySelectorAll(s);
+function escapeHtml(s){ return (s==null?'':String(s)).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function showToast(msg){
+  const t = $('#toast');
+  $('#toastText').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => t.classList.remove('show'), 3400);
+}
+
+/* ==========================================================================
+   HEADER / NAV
+   ========================================================================== */
+const header = $('#siteHeader');
+document.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40), { passive:true });
+
+const burger = $('#burger'), navLinks = $('#navLinks');
+burger.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+});
+$$('#navLinks a').forEach(a => a.addEventListener('click', () => { navLinks.classList.remove('open'); burger.classList.remove('open'); }));
+
+const navSections = $$('section[id]');
+function navSpy(){
+  let current = '';
+  navSections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 140) current = sec.id; });
+  $$('[data-nav]').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+current));
+}
+document.addEventListener('scroll', navSpy, { passive:true });
+
+/* scroll reveal */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if (en.isIntersecting){ en.target.style.opacity = 1; en.target.style.transform = 'translateY(0)'; } });
+}, { threshold:.15 });
+$$('[data-aos]').forEach(el => {
+  el.style.opacity = 0; el.style.transform = 'translateY(24px)'; el.style.transition = 'opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1)';
+  revealObserver.observe(el);
+});
+
+/* ==========================================================================
+   POPULATE FILTER / SELECT OPTIONS FROM STATE
+   ========================================================================== */
+function populateCountrySelects(){
+  const opts = state.countries.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+  $('#vacCountryFilter').innerHTML = `<option value="">All Countries</option>` + opts;
+  $('#applyCountrySelect').innerHTML = `<option value="">Select</option>` + opts;
+  $('#vf_country').innerHTML = opts;
+}
+function populateCategorySelects(){
+  const opts = state.categories.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+  $('#vacCategoryFilter').innerHTML = `<option value="">All Categories</option>` + opts;
+  $('#applyCategorySelect').innerHTML = `<option value="">Select</option>` + opts;
+  $('#vf_category').innerHTML = `<option value="">None</option>` + opts;
+}
+
+/* ==========================================================================
+   VACANCY BADGES
+   ========================================================================== */
+function daysUntil(dateStr){
+  if (!dateStr) return 999;
+  const diff = (new Date(dateStr) - new Date());
+  return Math.ceil(diff / 86400000);
+}
+function vacBadges(v){
+  const badges = [];
+  if ((new Date() - new Date(v.createdAt)) / 86400000 <= 5) badges.push('<span class="mini-tag new"><i class="fa-solid fa-star"></i> New</span>');
+  if (v.urgent) badges.push('<span class="mini-tag urgent"><i class="fa-solid fa-bolt"></i> Urgent</span>');
+  if (v.featured) badges.push('<span class="mini-tag featured"><i class="fa-solid fa-crown"></i> Featured</span>');
+  if (daysUntil(v.deadline) <= 5 && daysUntil(v.deadline) >= 0) badges.push('<span class="mini-tag closing"><i class="fa-solid fa-hourglass-half"></i> Closing Soon</span>');
+  badges.push('<span class="mini-tag sample">Sample Listing</span>');
+  return badges.join('');
+}
+
+/* ==========================================================================
+   RENDER: PUBLIC VACANCIES GRID
+   ========================================================================== */
+function getFilteredVacancies(){
+  const q = $('#vacSearch').value.toLowerCase().trim();
+  const country = $('#vacCountryFilter').value;
+  const category = $('#vacCategoryFilter').value;
+  const exp = $('#vacExpFilter').value;
+  const sort = $('#vacSort').value;
+
+  let list = state.vacancies.filter(v => v.status === 'published');
+  if (q) list = list.filter(v => (v.title+' '+v.employer+' '+v.description).toLowerCase().includes(q));
+  if (country) list = list.filter(v => v.country === country);
+  if (category) list = list.filter(v => v.category === category);
+  if (exp) list = list.filter(v => (parseInt(v.experience) || 0) >= parseInt(exp));
+
+  if (sort === 'salary-high') list = [...list].sort((a,b) => (parseInt(b.salary)||0) - (parseInt(a.salary)||0));
+  else if (sort === 'deadline') list = [...list].sort((a,b) => daysUntil(a.deadline) - daysUntil(b.deadline));
+  else list = [...list].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  return list;
+}
+
+function vacCardHtml(v){
+  return `
+  <div class="vac-card">
+    <div class="badge-row" style="margin-bottom:12px;">${vacBadges(v)}</div>
+    <div class="vac-card-top">
+      <div><h4>${escapeHtml(v.title)}</h4><div class="vac-country">${state.countryFlags[v.country]||'🌍'} ${escapeHtml(v.country)} · ${escapeHtml(v.employer||'Confidential Employer')}</div></div>
+    </div>
+    <div class="vac-meta">
+      <div>Positions<b>${v.positions||'—'}</b></div>
+      <div>Salary<b>${escapeHtml(v.salary||'—')} ${escapeHtml(v.currency||'')}</b></div>
+      <div>Experience<b>${escapeHtml(v.experience||'Any')}</b></div>
+      <div>Duration<b>${escapeHtml(v.duration||'—')}</b></div>
+    </div>
+    ${v.deadline ? `<div class="vac-deadline"><i class="fa-regular fa-clock"></i> Deadline: ${v.deadline} (${daysUntil(v.deadline)>=0 ? daysUntil(v.deadline)+' days left' : 'closed'})</div>` : ''}
+    <p class="vac-desc">${escapeHtml((v.description||'').slice(0,110))}${(v.description||'').length>110?'…':''}</p>
+    <div class="vac-footer">
+      <button class="btn btn-outline-navy btn-sm" data-view-vac="${v.id}">View Details</button>
+      <button class="btn btn-gold btn-sm" data-apply-vac="${v.id}">Apply Now</button>
+    </div>
+  </div>`;
+}
+
+function renderVacancies(){
+  const list = getFilteredVacancies();
+  $('#vacCount').textContent = `${list.length} vacanc${list.length===1?'y':'ies'} found`;
+  $('#vacGrid').innerHTML = list.length ? list.map(vacCardHtml).join('') :
+    `<div class="no-results"><i class="fa-solid fa-inbox"></i>No vacancies match your filters. Try broadening your search.</div>`;
+
+  $$('[data-view-vac]').forEach(b => b.addEventListener('click', () => openVacancyDetail(b.dataset.viewVac)));
+  $$('[data-apply-vac]').forEach(b => b.addEventListener('click', () => {
+    const v = state.vacancies.find(x => x.id === b.dataset.applyVac);
+    document.getElementById('apply').scrollIntoView({ behavior:'smooth' });
+    if (v){ $('#preferredJobInput').value = v.title; $('#applyCountrySelect').value = v.country; }
+  }));
+
+  // hero stats
+  $('#statVacancies').textContent = state.vacancies.filter(v=>v.status==='published').length + '+';
+  $('#statCountries').textContent = state.countries.length;
+}
+
+function openVacancyDetail(id){
+  const v = state.vacancies.find(x => x.id === id);
+  if (!v) return;
+  $('#vacModalBody').innerHTML = `
+    <div class="badge-row" style="margin-bottom:14px;">${vacBadges(v)}</div>
+    <h2 style="font-family:var(--font-display); color:var(--navy); font-size:1.6rem; margin-bottom:6px;">${escapeHtml(v.title)}</h2>
+    <p style="color:var(--gray); margin-bottom:20px;">${state.countryFlags[v.country]||'🌍'} ${escapeHtml(v.country)} · ${escapeHtml(v.employer||'Confidential Employer')}</p>
+    <div class="vac-meta" style="grid-template-columns:repeat(3,1fr); margin-bottom:20px;">
+      <div>Positions<b>${v.positions||'—'}</b></div>
+      <div>Salary<b>${escapeHtml(v.salary||'—')} ${escapeHtml(v.currency||'')}</b></div>
+      <div>Duration<b>${escapeHtml(v.duration||'—')}</b></div>
+      <div>Experience<b>${escapeHtml(v.experience||'Any')}</b></div>
+      <div>Qualification<b>${escapeHtml(v.qualification||'—')}</b></div>
+      <div>Age<b>${escapeHtml(v.age||'Any')}</b></div>
+      <div>Gender<b>${escapeHtml(v.gender||'Any')}</b></div>
+      <div>Accommodation<b>${escapeHtml(v.accommodation||'—')}</b></div>
+      <div>Food<b>${escapeHtml(v.food||'—')}</b></div>
+      <div>Transportation<b>${escapeHtml(v.transportation||'—')}</b></div>
+      <div>Deadline<b>${escapeHtml(v.deadline||'—')}</b></div>
+      <div>Category<b>${escapeHtml(v.category||'—')}</b></div>
+    </div>
+    <div style="margin-bottom:16px;"><b style="color:var(--navy); font-size:.85rem;">Job Description</b><p style="color:var(--gray); font-size:.86rem; margin-top:6px;">${escapeHtml(v.description||'—')}</p></div>
+    <div style="margin-bottom:16px;"><b style="color:var(--navy); font-size:.85rem;">Requirements</b><p style="color:var(--gray); font-size:.86rem; margin-top:6px;">${escapeHtml(v.requirements||'—')}</p></div>
+    <div style="margin-bottom:24px;"><b style="color:var(--navy); font-size:.85rem;">Benefits</b><p style="color:var(--gray); font-size:.86rem; margin-top:6px;">${escapeHtml(v.benefits||'—')}</p></div>
+    <button class="btn btn-gold btn-block" id="applyFromModal">Apply Now</button>
+  `;
+  $('#vacModal').classList.add('open');
+  $('#applyFromModal').addEventListener('click', () => {
+    closeModals();
+    document.getElementById('apply').scrollIntoView({ behavior:'smooth' });
+    $('#preferredJobInput').value = v.title; $('#applyCountrySelect').value = v.country;
+  });
+}
+
+['#vacSearch','#vacCountryFilter','#vacCategoryFilter','#vacExpFilter','#vacSort'].forEach(sel => {
+  $(sel).addEventListener('input', renderVacancies);
+  $(sel).addEventListener('change', renderVacancies);
+});
+
+/* ==========================================================================
+   RENDER: COUNTRIES / PROFESSIONS
+   ========================================================================== */
+function renderCountries(){
+  $('#countryGrid').innerHTML = state.countries.map(c => {
+    const count = state.vacancies.filter(v => v.status==='published' && v.country===c).length;
+    return `<div class="country-card" data-filter-country="${escapeHtml(c)}"><div class="flag">${state.countryFlags[c]||'🌍'}</div><h5>${escapeHtml(c)}</h5><span>${count} Open Position${count===1?'':'s'}</span></div>`;
+  }).join('');
+  $$('[data-filter-country]').forEach(el => el.addEventListener('click', () => {
+    $('#vacCountryFilter').value = el.dataset.filterCountry;
+    renderVacancies();
+    document.getElementById('vacancies').scrollIntoView({ behavior:'smooth' });
+  }));
+}
+const profIcons = {'Engineers':'fa-drafting-compass','Construction Workers':'fa-helmet-safety','Electricians':'fa-bolt','Plumbers':'fa-wrench','Welders':'fa-fire','Drivers':'fa-car','Heavy Drivers':'fa-truck','Technicians':'fa-screwdriver-wrench','Healthcare Professionals':'fa-user-doctor','Hospitality Workers':'fa-bell-concierge','Security Staff':'fa-shield-halved','Skilled Workers':'fa-toolbox','Semi-Skilled Workers':'fa-gears','General Workers':'fa-people-group'};
+function renderProfessions(){
+  $('#profGrid').innerHTML = state.categories.map(c => `<div class="prof-card" data-filter-cat="${escapeHtml(c)}"><i class="fa-solid ${profIcons[c]||'fa-briefcase'}"></i><span>${escapeHtml(c)}</span></div>`).join('');
+  $$('[data-filter-cat]').forEach(el => el.addEventListener('click', () => {
+    $('#vacCategoryFilter').value = el.dataset.filterCat;
+    renderVacancies();
+    document.getElementById('vacancies').scrollIntoView({ behavior:'smooth' });
+  }));
+}
+
+/* ==========================================================================
+   MODALS
+   ========================================================================== */
+function closeModals(){ $$('.modal-overlay').forEach(m => m.classList.remove('open')); }
+$$('[data-close-modal]').forEach(b => b.addEventListener('click', closeModals));
+$$('.modal-overlay').forEach(m => m.addEventListener('click', (e) => { if (e.target === m) closeModals(); }));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModals(); });
+
+$('#footerPrivacy').addEventListener('click', (e) => {
+  e.preventDefault();
+  $('#infoModalBody').innerHTML = `<h3 style="font-family:var(--font-display); color:var(--navy); margin-bottom:14px;">Privacy Policy</h3><p style="color:var(--gray); font-size:.86rem; line-height:1.7;">Placeholder — the agency administrator can replace this with the actual privacy policy text via the admin panel content settings.</p>`;
+  $('#infoModal').classList.add('open');
+});
+$('#footerTerms').addEventListener('click', (e) => {
+  e.preventDefault();
+  $('#infoModalBody').innerHTML = `<h3 style="font-family:var(--font-display); color:var(--navy); margin-bottom:14px;">Terms &amp; Conditions</h3><p style="color:var(--gray); font-size:.86rem; line-height:1.7;">Placeholder — the agency administrator can replace this with the actual terms &amp; conditions text via the admin panel content settings.</p>`;
+  $('#infoModal').classList.add('open');
+});
+
+/* ==========================================================================
+   FILE FIELD UI + VALIDATION
+   ========================================================================== */
+$$('[data-filefield]').forEach(field => {
+  const input = field.querySelector('input[type=file]');
+  const label = field.querySelector('.file-label');
+  const originalLabel = label.textContent;
+  input.addEventListener('change', () => {
+    if (!input.files.length){ field.classList.remove('has-file'); label.textContent = originalLabel; return; }
+    const maxMB = input.accept.includes('png') && !input.accept.includes('pdf') ? 2 : 5;
+    let ok = true, names = [];
+    for (const f of input.files){
+      names.push(f.name);
+      if (f.size > maxMB * 1024 * 1024) ok = false;
+    }
+    if (!ok){
+      showToast(`File too large — max ${maxMB}MB allowed.`);
+      input.value = '';
+      field.classList.remove('has-file'); label.textContent = originalLabel;
+      return;
+    }
+    field.classList.add('has-file');
+    label.textContent = names.join(', ');
+  });
+});
+
+/* ==========================================================================
+   PUBLIC CANDIDATE LIST — anonymized, privacy-safe (no name/CNIC/contact info)
+   ========================================================================== */
+function renderPublicCandidates(){
+  const recent = state.applications.slice(0, 10);
+  $('#publicCandidatesTable').innerHTML = recent.length ? recent.map(a => `
+    <tr>
+      <td>REF-${a.id}</td>
+      <td>${escapeHtml(a.profession || 'Not specified')}</td>
+      <td>${escapeHtml(a.preferredCountry || 'Open to any')}</td>
+      <td>${escapeHtml(a.experience || 'Not specified')}</td>
+      <td style="font-family:var(--font-mono); font-size:.76rem;">${new Date(a.createdAt).toLocaleDateString()}</td>
+    </tr>`).join('') : `<tr><td colspan="5" style="text-align:center; color:var(--gray); padding:26px;">No candidates registered yet — be the first to apply.</td></tr>`;
+}
+
+/* ==========================================================================
+   APPLICATION FORM
+   ========================================================================== */
+const appForm = $('#applicationForm');
+appForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!supabaseConfigured){ showToast('Site is not connected to the database yet — see setup instructions.'); return; }
+  let valid = true;
+  $$('.field', appForm).forEach(f => f.classList.remove('invalid'));
+
+  // CNIC is optional now — only validate its format if the candidate filled it in
+  const cnicInput = appForm.querySelector('[name=cnic]');
+  if (cnicInput.value.trim() && !/^\d{5}-\d{7}-\d$/.test(cnicInput.value.trim())){
+    cnicInput.closest('.field').classList.add('invalid'); valid = false;
+  }
+
+  $$('[required]', appForm).forEach(inp => {
+    if (inp.type === 'file'){ if (!inp.files.length) { inp.closest('.field').classList.add('invalid'); valid = false; } }
+    else if (!inp.value.trim()){ inp.closest('.field').classList.add('invalid'); valid = false; }
+  });
+
+  if (!valid){ showToast('Please complete the required fields (Name, Mobile, Profession, CV).'); return; }
+
+  const fd = new FormData(appForm);
+  const fileNames = (name) => appForm.querySelector(`[name=${name}]`).files.length ? [...appForm.querySelector(`[name=${name}]`).files].map(f=>f.name).join(', ') : '';
+
+  const newApp = {
+    fullName: fd.get('fullName'), fatherName: fd.get('fatherName'), dob: fd.get('dob') || null, cnic: fd.get('cnic'),
+    gender: fd.get('gender'), maritalStatus: fd.get('maritalStatus'), nationality: fd.get('nationality'),
+    city: fd.get('city'), province: fd.get('province'), phone: fd.get('mobile'), whatsapp: fd.get('whatsapp'), email: fd.get('email'),
+    profession: fd.get('profession'), jobCategory: fd.get('jobCategory'), qualification: fd.get('qualification'),
+    experience: fd.get('totalExperience'), overseasExperience: fd.get('overseasExperience'), currentEmployer: fd.get('currentEmployer'),
+    currentJobTitle: fd.get('currentJobTitle'), preferredCountry: fd.get('preferredCountry'), preferredJob: fd.get('preferredJob'),
+    expectedSalary: fd.get('expectedSalary'),
+    cvFile: fileNames('cv'), passportFile: fileNames('passport'), cnicFile: fileNames('cnicFile'), photoFile: fileNames('photo'), otherDocs: fileNames('otherDocs'),
+    status: 'New', adminNotes: '',
+  };
+
+  const submitBtn = appForm.querySelector('button[type=submit]');
+  submitBtn.disabled = true; submitBtn.textContent = 'Submitting…';
+  const { data, error } = await supabase.from('applications').insert([appToRow(newApp)]).select().single();
+  submitBtn.disabled = false; submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Application';
+
+  if (error){
+    console.warn(error);
+    showToast('Could not submit — please check your connection and try again.');
+    return;
+  }
+
+  appForm.style.display = 'none';
+  $('#applicationSuccess').style.display = 'block';
+  showToast(`Application saved to the database. (Real email notifications aren't connected yet — see setup notes.)`);
+  renderPublicCandidates();
+});
+$('#applyAnotherBtn').addEventListener('click', () => {
+  appForm.reset();
+  $$('.field', appForm).forEach(f => f.classList.remove('invalid'));
+  $$('[data-filefield]', appForm).forEach(f => { f.classList.remove('has-file'); });
+  appForm.style.display = '';
+  $('#applicationSuccess').style.display = 'none';
+});
+
+/* ==========================================================================
+   EMPLOYER FORM
+   ========================================================================== */
+$('#employerForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!supabaseConfigured){ showToast('Site is not connected to the database yet — see setup instructions.'); return; }
+  const fd = new FormData(e.target);
+  const newInquiry = {
+    companyName: fd.get('companyName'), contactPerson: fd.get('contactPerson'), email: fd.get('email'), phone: fd.get('phone'),
+    country: fd.get('country'), profession: fd.get('profession'), workers: fd.get('workers'), qualification: fd.get('qualification'),
+    experience: fd.get('experience'), salary: fd.get('salary'), benefits: fd.get('benefits'), notes: fd.get('notes'),
+  };
+  const { error } = await supabase.from('employer_inquiries').insert([empToRow(newInquiry)]);
+  if (error){ console.warn(error); showToast('Could not submit — please check your connection and try again.'); return; }
+  e.target.reset();
+  showToast('Manpower request saved to the database. (Real email notifications aren\'t connected yet — see setup notes.)');
+});
+
+/* ==========================================================================
+   CONTACT FORM
+   ========================================================================== */
+$('#contactForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  e.target.reset();
+  showToast('Message sent — notification queued for almirahmed638@gmail.com (demo)');
+});
+
+/* ==========================================================================
+   ADMIN — AUTH (real Supabase authentication — checks against your actual
+   Supabase user, not a hardcoded password. Session persists across reloads.)
+   ========================================================================== */
+$('#adminNavLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  $('#adminView').classList.add('open');
+  if (!supabaseConfigured){
+    $('#loginNoticeBox').innerHTML = '<b style="color:var(--red);">Database not connected yet.</b> Paste your Supabase URL and anon key into index.html (see setup notes), then reload.';
+  }
+});
+$('#adminBackToSite').addEventListener('click', () => $('#adminView').classList.remove('open'));
+$('#adminGoToSite').addEventListener('click', () => $('#adminView').classList.remove('open'));
+
+async function enterAdminDashboard(){
+  state.adminAuthed = true;
+  $('#adminLoginWrap').style.display = 'none';
+  $('#adminShell').classList.add('active');
+  $('#adminLoginError').style.display = 'none';
+  await refreshAdminData();
+}
+
+$('#adminLoginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!supabaseConfigured){ $('#adminLoginError').textContent = 'Database not connected — see setup notes.'; $('#adminLoginError').style.display = 'block'; return; }
+  const submitBtn = $('#adminLoginSubmit');
+  submitBtn.disabled = true; submitBtn.textContent = 'Logging in…';
+  const { error } = await supabase.auth.signInWithPassword({ email: $('#adminUser').value.trim(), password: $('#adminPass').value });
+  submitBtn.disabled = false; submitBtn.textContent = 'Log In';
+  if (error){
+    $('#adminLoginError').textContent = error.message || 'Incorrect email or password.';
+    $('#adminLoginError').style.display = 'block';
+    return;
+  }
+  await enterAdminDashboard();
+});
+$('#adminLogoutBtn').addEventListener('click', async () => {
+  await supabase.auth.signOut();
+  state.adminAuthed = false;
+  $('#adminShell').classList.remove('active');
+  $('#adminLoginWrap').style.display = 'flex';
+  $('#adminUser').value = ''; $('#adminPass').value = '';
+});
+
+$$('.admin-nav-item[data-admin-view]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $$('.admin-nav-item[data-admin-view]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const view = btn.dataset.adminView;
+    $$('.admin-panel-view').forEach(p => p.classList.toggle('active', p.dataset.panel === view));
+  });
+});
+
+/* ==========================================================================
+   ADMIN — DASHBOARD STATS
+   ========================================================================== */
+function renderAdminStats(){
+  const totalVac = state.vacancies.length;
+  const activeVac = state.vacancies.filter(v => v.status === 'published').length;
+  const totalApps = state.applications.length;
+  const newApps = state.applications.filter(a => a.status === 'New').length;
+  $('#adminStatCards').innerHTML = `
+    <div class="stat-card"><b>${totalVac}</b><span>Total Vacancies</span></div>
+    <div class="stat-card"><b>${activeVac}</b><span>Active Vacancies</span></div>
+    <div class="stat-card"><b>${totalApps}</b><span>Applications Received</span></div>
+    <div class="stat-card"><b>${newApps}</b><span>New Applications</span></div>
+  `;
+  const byCountry = {};
+  state.applications.forEach(a => { const k = a.preferredCountry || 'Not specified'; byCountry[k] = (byCountry[k]||0)+1; });
+  $('#statByCountry').innerHTML = Object.keys(byCountry).length ? Object.entries(byCountry).map(([k,v]) => `<div class="split-row"><span>${escapeHtml(k)}</span><b>${v}</b></div>`).join('') : `<div class="split-row"><span style="color:var(--gray)">No applications yet</span></div>`;
+  const byProf = {};
+  state.applications.forEach(a => { const k = a.profession || 'Not specified'; byProf[k] = (byProf[k]||0)+1; });
+  $('#statByProfession').innerHTML = Object.keys(byProf).length ? Object.entries(byProf).map(([k,v]) => `<div class="split-row"><span>${escapeHtml(k)}</span><b>${v}</b></div>`).join('') : `<div class="split-row"><span style="color:var(--gray)">No applications yet</span></div>`;
+}
+
+/* ==========================================================================
+   ADMIN — VACANCY MANAGEMENT
+   ========================================================================== */
+function renderAdminVacancies(){
+  const q = ($('#adminVacSearch').value||'').toLowerCase();
+  const rows = state.vacancies.filter(v => !q || (v.title+' '+v.country).toLowerCase().includes(q));
+  $('#adminVacTable').innerHTML = rows.map(v => `
+    <tr>
+      <td><b>${escapeHtml(v.title)}</b><br><span style="color:var(--gray); font-size:.74rem;">${escapeHtml(v.employer||'')}</span></td>
+      <td>${escapeHtml(v.country)}</td>
+      <td>${v.positions||'—'}</td>
+      <td><span class="status-pill ${v.status}">${v.status}</span></td>
+      <td>${v.featured?'<span class="mini-tag featured">Featured</span> ':''}${v.urgent?'<span class="mini-tag urgent">Urgent</span>':''}</td>
+      <td style="font-family:var(--font-mono); font-size:.75rem;">${v.deadline||'—'}</td>
+      <td style="white-space:nowrap;">
+        <button class="icon-btn" data-edit-vac="${v.id}" title="Edit"><i class="fa-solid fa-pen"></i></button>
+        <button class="icon-btn" data-toggle-pub="${v.id}" title="${v.status==='published'?'Unpublish':'Publish'}"><i class="fa-solid ${v.status==='published'?'fa-eye-slash':'fa-eye'}"></i></button>
+        <button class="icon-btn danger" data-delete-vac="${v.id}" title="Delete"><i class="fa-solid fa-trash"></i></button>
+      </td>
+    </tr>`).join('') || `<tr><td colspan="7" style="text-align:center; color:var(--gray); padding:30px;">No vacancies yet.</td></tr>`;
+
+  $$('[data-edit-vac]').forEach(b => b.addEventListener('click', () => openVacEditModal(b.dataset.editVac)));
+  $$('[data-toggle-pub]').forEach(b => b.addEventListener('click', async () => {
+    const v = state.vacancies.find(x=>x.id===b.dataset.togglePub);
+    const newStatus = v.status === 'published' ? 'unpublished' : 'published';
+    const { error } = await supabase.from('vacancies').update({ status: newStatus }).eq('id', v.id);
+    if (error){ console.warn(error); showToast('Could not update — try again.'); return; }
+    v.status = newStatus;
+    showToast(`Vacancy ${newStatus === 'published' ? 'published' : 'unpublished'} — live on the public site now.`);
+    renderAdminAll();
+    renderVacancies();
+  }));
+  $$('[data-delete-vac]').forEach(b => b.addEventListener('click', async () => {
+    if (!confirm('Delete this vacancy? This cannot be undone.')) return;
+    const { error } = await supabase.from('vacancies').delete().eq('id', b.dataset.deleteVac);
+    if (error){ console.warn(error); showToast('Could not delete — try again.'); return; }
+    state.vacancies = state.vacancies.filter(x => x.id !== b.dataset.deleteVac);
+    showToast('Vacancy deleted.');
+    renderAdminAll();
+    renderVacancies();
+  }));
+}
+$('#adminVacSearch').addEventListener('input', renderAdminVacancies);
+$('#addVacancyBtn').addEventListener('click', () => openVacEditModal(null));
+
+function openVacEditModal(id){
+  const v = id ? state.vacancies.find(x=>x.id===id) : null;
+  $('#vacEditTitle').textContent = v ? 'Edit Vacancy' : 'Add Vacancy';
+  $('#vacEditId').value = v ? v.id : '';
+  const set = (sel, val) => { $(sel).value = val ?? ''; };
+  set('#vf_title', v?.title); set('#vf_employer', v?.employer); set('#vf_country', v?.country || state.countries[0]);
+  set('#vf_category', v?.category); set('#vf_positions', v?.positions || 1); set('#vf_salary', v?.salary);
+  set('#vf_currency', v?.currency); set('#vf_duration', v?.duration); set('#vf_experience', v?.experience);
+  set('#vf_qualification', v?.qualification); set('#vf_age', v?.age); set('#vf_gender', v?.gender||'');
+  set('#vf_deadline', v?.deadline); set('#vf_accommodation', v?.accommodation||'Provided'); set('#vf_food', v?.food||'Provided');
+  set('#vf_transport', v?.transportation||'Provided'); set('#vf_description', v?.description); set('#vf_requirements', v?.requirements);
+  set('#vf_benefits', v?.benefits); $('#vf_featured').checked = !!v?.featured; $('#vf_urgent').checked = !!v?.urgent;
+  set('#vf_status', v?.status || 'published');
+  $('#vacEditModal').classList.add('open');
+}
+$('#vacEditForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const id = $('#vacEditId').value;
+  const data = {
+    title: $('#vf_title').value.trim(), employer: $('#vf_employer').value.trim(), country: $('#vf_country').value,
+    category: $('#vf_category').value, positions: parseInt($('#vf_positions').value)||1, salary: $('#vf_salary').value,
+    currency: $('#vf_currency').value, duration: $('#vf_duration').value, experience: $('#vf_experience').value,
+    qualification: $('#vf_qualification').value, age: $('#vf_age').value, gender: $('#vf_gender').value,
+    deadline: $('#vf_deadline').value, accommodation: $('#vf_accommodation').value, food: $('#vf_food').value,
+    transportation: $('#vf_transport').value, description: $('#vf_description').value, requirements: $('#vf_requirements').value,
+    benefits: $('#vf_benefits').value, featured: $('#vf_featured').checked, urgent: $('#vf_urgent').checked, status: $('#vf_status').value,
+  };
+  if (!data.title){ showToast('Job title is required.'); return; }
+
+  const saveBtn = e.target.querySelector('button[type=submit]');
+  saveBtn.disabled = true; saveBtn.textContent = 'Saving…';
+
+  if (id){
+    const { error } = await supabase.from('vacancies').update(vacToRow(data)).eq('id', id);
+    saveBtn.disabled = false; saveBtn.textContent = 'Save Vacancy';
+    if (error){ console.warn(error); showToast('Could not save — try again.'); return; }
+    Object.assign(state.vacancies.find(x=>x.id===id), data);
+    showToast('Vacancy updated — changes are live on the public site.');
+  } else {
+    const { data: inserted, error } = await supabase.from('vacancies').insert([vacToRow(data)]).select().single();
+    saveBtn.disabled = false; saveBtn.textContent = 'Save Vacancy';
+    if (error){ console.warn(error); showToast('Could not add — try again.'); return; }
+    state.vacancies.unshift(vacFromRow(inserted));
+    showToast('Vacancy added — now live on the public site.');
+  }
+  closeModals();
+  renderAdminAll();
+  renderVacancies();
+});
+
+/* ==========================================================================
+   ADMIN — APPLICATIONS
+   ========================================================================== */
+const STATUS_FLOW = ['New','Under Review','Shortlisted','Interview','Selected','Rejected'];
+function statusClass(s){ return s.toLowerCase().replace(/\s+/g,''); }
+function renderAdminApplications(){
+  const q = ($('#adminAppSearch').value||'').toLowerCase();
+  const statusF = $('#adminAppStatusFilter').value;
+  let rows = state.applications.filter(a => (!q || (a.fullName+' '+a.profession).toLowerCase().includes(q)) && (!statusF || a.status === statusF));
+  $('#adminAppTable').innerHTML = rows.map(a => `
+    <tr>
+      <td><b>${escapeHtml(a.fullName)}</b><br><span style="color:var(--gray); font-size:.74rem;">${escapeHtml(a.phone||'')}</span></td>
+      <td>${escapeHtml(a.profession||'—')}</td>
+      <td>${escapeHtml(a.preferredCountry||'—')}</td>
+      <td style="font-family:var(--font-mono); font-size:.74rem;">${new Date(a.createdAt).toLocaleDateString()}</td>
+      <td><span class="status-pill ${statusClass(a.status)}">${escapeHtml(a.status)}</span></td>
+      <td style="white-space:nowrap;">
+        <button class="icon-btn" data-view-app="${a.id}" title="View"><i class="fa-solid fa-eye"></i></button>
+        <button class="icon-btn danger" data-delete-app="${a.id}" title="Delete"><i class="fa-solid fa-trash"></i></button>
+      </td>
+    </tr>`).join('') || `<tr><td colspan="6" style="text-align:center; color:var(--gray); padding:30px;">No applications yet.</td></tr>`;
+
+  $$('[data-view-app]').forEach(b => b.addEventListener('click', () => openAppDetail(b.dataset.viewApp)));
+  $$('[data-delete-app]').forEach(b => b.addEventListener('click', async () => {
+    if (!confirm('Delete this application?')) return;
+    const { error } = await supabase.from('applications').delete().eq('id', b.dataset.deleteApp);
+    if (error){ console.warn(error); showToast('Could not delete — try again.'); return; }
+    state.applications = state.applications.filter(x => x.id !== b.dataset.deleteApp);
+    renderAdminAll();
+  }));
+}
+$('#adminAppSearch').addEventListener('input', renderAdminApplications);
+$('#adminAppStatusFilter').addEventListener('change', renderAdminApplications);
+
+function openAppDetail(id){
+  const a = state.applications.find(x=>x.id===id);
+  if (!a) return;
+  const statusOptions = STATUS_FLOW.map(s => `<option value="${s}" ${a.status===s?'selected':''}>${s}</option>`).join('');
+  $('#appDetailBody').innerHTML = `
+    <h2 style="font-family:var(--font-display); color:var(--navy); font-size:1.4rem; margin-bottom:18px;">${escapeHtml(a.fullName)}</h2>
+    <div class="form-grid" style="margin-bottom:6px;">
+      <div><b style="font-size:.78rem; color:var(--gray);">Father/Husband Name</b><p style="font-size:.85rem;">${escapeHtml(a.fatherName||'—')}</p></div>
+      <div><b style="font-size:.78rem; color:var(--gray);">CNIC</b><p style="font-size:.85rem;">${escapeHtml(a.cnic||'—')}</p></div>
+      <div><b style="font-size:.78rem; color:var(--gray);">Phone</b><p style="font-size:.85rem;">${escapeHtml(a.phone||'—')}</p></div>
+      <div><b style="font-size:.78rem; color:var(--gray);">Email</b><p style="font-size:.85rem;">${escapeHtml(a.email||'—')}</p></div>
+      <div><b style="font-size:.78rem; color:var(--gray);">City / Province</b><p style="font-size:.85rem;">${escapeHtml(a.city||'—')}, ${escapeHtml(a.province||'—')}</p></div>
+      <div><b style="font-size:.78rem; color:var(--gray);">Profession</b><p style="font-size:.85rem;">${escapeHtml(a.profession||'—')}</p></div>
+      <div><b style="font-size:.78rem; color:var(--gray);">Experience</b><p style="font-size:.85rem;">${escapeHtml(a.experience||'—')}</p></div>
+      <div><b style="font-size:.78rem; color:var(--gray);">Preferred Country</b><p style="font-size:.85rem;">${escapeHtml(a.preferredCountry||'—')}</p></div>
+      <div><b style="font-size:.78rem; color:var(--gray);">Expected Salary</b><p style="font-size:.85rem;">${escapeHtml(a.expectedSalary||'—')}</p></div>
+    </div>
+    <div style="margin:16px 0;"><b style="font-size:.78rem; color:var(--gray);">Uploaded Documents</b>
+      <p style="font-size:.83rem; margin-top:6px;">CV: ${escapeHtml(a.cvFile||'—')} · CNIC: ${escapeHtml(a.cnicFile||'—')} · Photo: ${escapeHtml(a.photoFile||'—')} · Passport: ${escapeHtml(a.passportFile||'—')}</p>
+      <p style="font-size:.72rem; color:var(--gray); margin-top:4px;"><i class="fa-solid fa-circle-info"></i> Filenames only — real file storage/download needs Supabase Storage (not set up in this version).</p>
+    </div>
+    <div class="field" style="margin-bottom:14px;"><label>Application Status</label><select id="appStatusSelect">${statusOptions}</select></div>
+    <div class="field" style="margin-bottom:14px;"><label>Internal Notes</label><textarea id="appNotesInput">${escapeHtml(a.adminNotes||'')}</textarea></div>
+    <button class="btn btn-navy btn-block" id="saveAppDetail">Save Changes</button>
+  `;
+  $('#appDetailModal').classList.add('open');
+  $('#saveAppDetail').addEventListener('click', async () => {
+    const newStatus = $('#appStatusSelect').value, newNotes = $('#appNotesInput').value;
+    const { error } = await supabase.from('applications').update({ status: newStatus, admin_notes: newNotes }).eq('id', a.id);
+    if (error){ console.warn(error); showToast('Could not save — try again.'); return; }
+    a.status = newStatus; a.adminNotes = newNotes;
+    showToast('Application updated.');
+    closeModals();
+    renderAdminAll();
+  });
+}
+
+$('#exportAppsBtn').addEventListener('click', () => {
+  if (!state.applications.length){ showToast('No applications to export yet.'); return; }
+  const headers = ['Full Name','Father Name','CNIC','Phone','Email','City','Profession','Experience','Preferred Country','Status','Applied'];
+  const rows = state.applications.map(a => [a.fullName,a.fatherName,a.cnic,a.phone,a.email,a.city,a.profession,a.experience,a.preferredCountry,a.status,a.createdAt]);
+  const csv = [headers, ...rows].map(r => r.map(v => `"${(v||'').toString().replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type:'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'pakbolan_applications.csv'; a.click();
+  URL.revokeObjectURL(url);
+  showToast('CSV exported.');
+});
+
+/* ==========================================================================
+   ADMIN — EMPLOYER INQUIRIES
+   ========================================================================== */
+function renderAdminEmployers(){
+  $('#adminEmployerTable').innerHTML = state.employerInquiries.map(e => `
+    <tr>
+      <td><b>${escapeHtml(e.companyName)}</b></td>
+      <td>${escapeHtml(e.contactPerson)}<br><span style="color:var(--gray); font-size:.74rem;">${escapeHtml(e.phone||'')}</span></td>
+      <td>${escapeHtml(e.country||'—')}</td>
+      <td>${escapeHtml(e.workers||'—')}</td>
+      <td style="font-family:var(--font-mono); font-size:.74rem;">${new Date(e.createdAt).toLocaleDateString()}</td>
+      <td><button class="icon-btn danger" data-delete-emp="${e.id}"><i class="fa-solid fa-trash"></i></button></td>
+    </tr>`).join('') || `<tr><td colspan="6" style="text-align:center; color:var(--gray); padding:30px;">No employer inquiries yet.</td></tr>`;
+  $$('[data-delete-emp]').forEach(b => b.addEventListener('click', async () => {
+    const { error } = await supabase.from('employer_inquiries').delete().eq('id', b.dataset.deleteEmp);
+    if (error){ console.warn(error); showToast('Could not delete — try again.'); return; }
+    state.employerInquiries = state.employerInquiries.filter(x => x.id !== b.dataset.deleteEmp);
+    renderAdminAll();
+  }));
+}
+
+/* ==========================================================================
+   ADMIN — CONTENT (countries/categories)
+   ========================================================================== */
+function renderAdminContent(){
+  $('#adminCountryList').innerHTML = state.countries.map(c => `
+    <div class="split-row"><span>${state.countryFlags[c]||'🌍'} ${escapeHtml(c)}</span><button class="icon-btn danger" data-del-country="${escapeHtml(c)}"><i class="fa-solid fa-xmark"></i></button></div>
+  `).join('');
+  $('#adminCategoryList').innerHTML = state.categories.map(c => `
+    <div class="split-row"><span>${escapeHtml(c)}</span><button class="icon-btn danger" data-del-cat="${escapeHtml(c)}"><i class="fa-solid fa-xmark"></i></button></div>
+  `).join('');
+  $$('[data-del-country]').forEach(b => b.addEventListener('click', async () => {
+    state.countries = state.countries.filter(x => x !== b.dataset.delCountry);
+    await saveSettings();
+    populateCountrySelects(); renderAdminAll(); renderCountries(); renderVacancies();
+  }));
+  $$('[data-del-cat]').forEach(b => b.addEventListener('click', async () => {
+    state.categories = state.categories.filter(x => x !== b.dataset.delCat);
+    await saveSettings();
+    populateCategorySelects(); renderAdminAll(); renderProfessions(); renderVacancies();
+  }));
+}
+$('#addCountryBtn').addEventListener('click', async () => {
+  const v = $('#newCountryInput').value.trim();
+  if (!v) return;
+  if (!state.countries.includes(v)) state.countries.push(v);
+  await saveSettings();
+  $('#newCountryInput').value = '';
+  populateCountrySelects(); renderAdminAll(); renderCountries();
+});
+$('#addCategoryBtn').addEventListener('click', async () => {
+  const v = $('#newCategoryInput').value.trim();
+  if (!v) return;
+  if (!state.categories.includes(v)) state.categories.push(v);
+  await saveSettings();
+  $('#newCategoryInput').value = '';
+  populateCategorySelects(); renderAdminAll(); renderProfessions();
+});
+
+/* ==========================================================================
+   ADMIN — DATA & BACKUP (Excel export + live folder sync + reset)
+   ========================================================================== */
+let backupDirHandle = null;
+const hasFSAccess = 'showDirectoryPicker' in window;
+
+function toRows(list, columns){
+  // columns: [[header, keyOrFn], ...]
+  const headers = columns.map(c => c[0]);
+  const rows = list.map(item => columns.map(c => typeof c[1] === 'function' ? c[1](item) : (item[c[1]] ?? '')));
+  return [headers, ...rows];
+}
+const vacancyColumns = [
+  ['ID','id'],['Title','title'],['Employer','employer'],['Country','country'],['Category','category'],
+  ['Positions','positions'],['Salary','salary'],['Currency','currency'],['Duration','duration'],['Experience','experience'],
+  ['Qualification','qualification'],['Age','age'],['Gender','gender'],['Deadline','deadline'],['Accommodation','accommodation'],
+  ['Food','food'],['Transportation','transportation'],['Status','status'],['Featured', v=>v.featured?'Yes':'No'],['Urgent', v=>v.urgent?'Yes':'No'],
+  ['Description','description'],['Requirements','requirements'],['Benefits','benefits'],['Created', v=>new Date(v.createdAt).toLocaleString()],
+];
+const applicationColumns = [
+  ['ID','id'],['Full Name','fullName'],['Father/Husband Name','fatherName'],['DOB','dob'],['CNIC','cnic'],['Gender','gender'],
+  ['Marital Status','maritalStatus'],['Nationality','nationality'],['City','city'],['Province','province'],['Phone','phone'],
+  ['WhatsApp','whatsapp'],['Email','email'],['Profession','profession'],['Job Category','jobCategory'],['Qualification','qualification'],
+  ['Total Experience','experience'],['Overseas Experience','overseasExperience'],['Current Employer','currentEmployer'],
+  ['Current Job Title','currentJobTitle'],['Preferred Country','preferredCountry'],['Preferred Job','preferredJob'],
+  ['Expected Salary','expectedSalary'],['CV File','cvFile'],['Passport File','passportFile'],['CNIC File','cnicFile'],
+  ['Photo File','photoFile'],['Other Docs','otherDocs'],['Status','status'],['Admin Notes','adminNotes'],
+  ['Applied', a=>new Date(a.createdAt).toLocaleString()],
+];
+const employerColumns = [
+  ['ID','id'],['Company Name','companyName'],['Contact Person','contactPerson'],['Email','email'],['Phone','phone'],
+  ['Country','country'],['Required Profession','profession'],['Number of Workers','workers'],['Qualification','qualification'],
+  ['Experience Required','experience'],['Salary','salary'],['Benefits','benefits'],['Additional Requirements','notes'],
+  ['Submitted', e=>new Date(e.createdAt).toLocaleString()],
+];
+
+function exportExcelWorkbook(){
+  if (typeof XLSX === 'undefined'){ showToast('Excel library failed to load — check your internet connection.'); return; }
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(toRows(state.vacancies, vacancyColumns)), 'Vacancies');
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(toRows(state.applications, applicationColumns)), 'Applications');
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(toRows(state.employerInquiries, employerColumns)), 'Employer Inquiries');
+  const stamp = new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb, `PakBolan_Data_${stamp}.xlsx`);
+  showToast('Excel workbook downloaded.');
+}
+$('#exportWorkbookBtn').addEventListener('click', exportExcelWorkbook);
+
+/* Live folder sync — writes real CSV files to a folder on disk, automatically,
+   every time data changes. Only works in Chromium browsers (Chrome/Edge) that
+   support the File System Access API, and only while this tab stays open —
+   the folder connection is not remembered after a reload (browser security). */
+function rowsToCsv(rows){
+  return rows.map(r => r.map(v => `"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n');
+}
+async function writeLiveBackupFiles(){
+  if (!backupDirHandle) return;
+  try{
+    const files = {
+      'vacancies.csv': toRows(state.vacancies, vacancyColumns),
+      'applications.csv': toRows(state.applications, applicationColumns),
+      'employer_inquiries.csv': toRows(state.employerInquiries, employerColumns),
+    };
+    for (const [name, rows] of Object.entries(files)){
+      const handle = await backupDirHandle.getFileHandle(name, { create:true });
+      const writable = await handle.createWritable();
+      await writable.write(rowsToCsv(rows));
+      await writable.close();
+    }
+    $('#backupFolderStatus').innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--green);"></i> Synced ${new Date().toLocaleTimeString()}`;
+  }catch(e){
+    console.warn('Live backup write failed', e);
+    $('#backupFolderStatus').innerHTML = `<i class="fa-solid fa-triangle-exclamation" style="color:var(--red);"></i> Sync failed — reconnect the folder`;
+  }
+}
+$('#connectBackupFolderBtn').addEventListener('click', async () => {
+  if (!hasFSAccess){ showToast('Live folder sync needs Chrome or Edge on desktop.'); return; }
+  try{
+    backupDirHandle = await window.showDirectoryPicker({ mode:'readwrite' });
+    $('#backupFolderStatus').innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--green);"></i> Connected — writing live CSV files`;
+    showToast('Live backup folder connected — vacancies.csv, applications.csv, and employer_inquiries.csv will update automatically.');
+    await writeLiveBackupFiles();
+  }catch(e){ /* user cancelled the folder picker — nothing to do */ }
+});
+
+function renderBackupPanel(){
+  const box = $('#storageStatusBox');
+  if (box){
+    box.innerHTML = supabaseConfigured
+      ? `<i class="fa-solid fa-circle-check" style="color:var(--green);"></i> Connected to Supabase — every visitor's data is saved to your shared database in real time.`
+      : `<i class="fa-solid fa-triangle-exclamation" style="color:var(--red);"></i> Not connected yet — paste your Supabase URL and anon key into index.html (see setup notes), then reload.`;
+  }
+  const tag = $('#liveSyncSupportTag');
+  const desc = $('#liveSyncDesc');
+  if (tag && desc){
+    if (hasFSAccess){
+      tag.textContent = 'Supported in this browser'; tag.style.color = 'var(--green)'; tag.style.borderColor = 'rgba(28,138,91,.3)';
+      desc.textContent = 'Optional local backup, on top of the database above: connect a folder on your computer and PAK BOLAN will also keep vacancies.csv, applications.csv, and employer_inquiries.csv updated there in real time, as long as this admin tab stays open.';
+    } else {
+      tag.textContent = 'Not supported in this browser'; tag.style.color = 'var(--red)'; tag.style.borderColor = 'rgba(193,68,60,.3)';
+      desc.textContent = 'Your browser doesn\'t support live folder writing (needs Chrome or Edge on desktop). Use the Excel Workbook download above instead whenever you want a fresh copy — your data is already safely stored in the database either way.';
+      $('#connectBackupFolderBtn').disabled = true;
+      $('#connectBackupFolderBtn').style.opacity = .5;
+      $('#connectBackupFolderBtn').style.cursor = 'not-allowed';
+    }
+  }
+}
+
+/* ==========================================================================
+   ADMIN — MASTER RENDER
+   ========================================================================== */
+function renderAdminAll(){
+  renderAdminStats();
+  renderAdminVacancies();
+  renderAdminApplications();
+  renderAdminEmployers();
+  renderAdminContent();
+  renderBackupPanel();
+  writeLiveBackupFiles(); // no-op unless a live backup folder is connected
+}
+
+/* ==========================================================================
+   INIT
+   ========================================================================== */
+async function init(){
+  if (!supabaseConfigured){
+    showToast('Site is not connected to a database yet — see setup notes in README.');
+    populateCountrySelects(); populateCategorySelects();
+    renderVacancies(); renderCountries(); renderProfessions(); renderPublicCandidates();
+    renderAdminAll();
+    navSpy();
+    return;
+  }
+
+  await refreshPublicData();
+  renderPublicCandidates();
+
+  // Restore an existing admin session (Supabase keeps this in its own
+  // storage automatically) so a logged-in admin doesn't need to log in
+  // again after a reload.
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session){
+    $('#adminView').classList.add('open');
+    await enterAdminDashboard();
+  } else {
+    renderAdminAll(); // renders empty/placeholder admin views behind the login screen
+  }
+
+  navSpy();
+
+  // Realtime — when ANY visitor changes data, everyone's view updates live,
+  // no refresh needed. This is what makes data genuinely shared.
+  supabase.channel('public-changes')
+    .on('postgres_changes', { event:'*', schema:'public', table:'vacancies' }, async () => {
+      await fetchVacancies(); renderVacancies(); renderCountries(); renderProfessions();
+      if (state.adminAuthed) renderAdminAll();
+    })
+    .on('postgres_changes', { event:'*', schema:'public', table:'applications' }, async () => {
+      if (state.adminAuthed){ await fetchApplications(); renderAdminAll(); }
+      renderPublicCandidates();
+    })
+    .on('postgres_changes', { event:'*', schema:'public', table:'employer_inquiries' }, async () => {
+      if (state.adminAuthed){ await fetchEmployerInquiries(); renderAdminAll(); }
+    })
+    .subscribe();
+}
+init();
+
+})();
+</script>
+
+</body>
+</html>
+
+
