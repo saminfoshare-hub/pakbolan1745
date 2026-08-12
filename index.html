@@ -10,6 +10,10 @@
 <meta property="og:title" content="PAK BOLAN INTERNATIONAL | Overseas Employment & Manpower Recruitment">
 <meta property="og:description" content="Connecting skilled Pakistani professionals and workers with employment opportunities around the world.">
 <meta name="theme-color" content="#0B1E3D">
+<!-- Real backend: Supabase (database + auth + file storage) and EmailJS (notification emails) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -770,6 +774,7 @@ table.admin-table{width:100%; border-collapse:collapse; min-width:760px;}
           <a href="https://wa.me/923028202273" target="_blank" rel="noopener" class="wa-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
         </div>
       </div>
+
       <div class="contact-person">
         <h5>Muhammad Shakeel Khan</h5><span class="role">Overseas Employment Promoter</span>
         <div class="contact-actions">
@@ -777,13 +782,17 @@ table.admin-table{width:100%; border-collapse:collapse; min-width:760px;}
           <a href="https://wa.me/923008202273" target="_blank" rel="noopener" class="wa-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
         </div>
       </div>
-       <div class="contact-person">
+
+
+      <div class="contact-person">
         <h5>Sardar M Afaq Khan</h5><span class="role">Overseas Employment Promoter</span>
         <div class="contact-actions">
           <a href="tel:+923000300262" class="call-btn"><i class="fa-solid fa-phone"></i> Call · 0302-8202273</a>
           <a href="https://wa.me/923000300262" target="_blank" rel="noopener" class="wa-btn"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
         </div>
       </div>
+
+
       <div class="contact-email-card">
         <i class="fa-solid fa-envelope"></i>
         <div><b>almirahmed638@gmail.com</b><span>Applications &amp; general inquiries</span></div>
@@ -865,9 +874,8 @@ table.admin-table{width:100%; border-collapse:collapse; min-width:760px;}
       <div class="logo"><div class="logo-mark">PB</div><div class="logo-text">PAK BOLAN<span>INTERNATIONAL</span></div></div>
       <h3>Admin Dashboard</h3>
       <p class="sub">Staff login</p>
-      <div class="demo-cred-box">
-        <b>Prototype notice:</b> no real backend is connected, so this login only checks the demo credentials below locally in your browser. A production build needs real server-side authentication.<br><br>
-        <b>Email:</b> admin@pakbolan.com<br><b>Password:</b> demo1234
+      <div class="demo-cred-box" id="adminLoginNotice">
+        Log in with the admin account you created in your Supabase project (Authentication → Users).
       </div>
       <form id="adminLoginForm">
         <div class="field" style="margin-bottom:14px;"><label>Email</label><input type="text" id="adminUser" autocomplete="off"></div>
@@ -1051,69 +1059,105 @@ table.admin-table{width:100%; border-collapse:collapse; min-width:760px;}
    genuinely updates the public site live within this browser session.
    ========================================================================== */
 const state = {
-  countries: ['Saudi Arabia','UAE','Qatar','Oman','Bahrain','Kuwait'],
-  categories: ['Engineers','Construction Workers','Electricians','Plumbers','Welders','Drivers','Heavy Drivers','Technicians','Healthcare Professionals','Hospitality Workers','Security Staff','Skilled Workers','Semi-Skilled Workers','General Workers'],
-  countryFlags: {'Saudi Arabia':'🇸🇦','UAE':'🇦🇪','Qatar':'🇶🇦','Oman':'🇴🇲','Bahrain':'🇧🇭','Kuwait':'🇰🇼'},
+  countries: [],
+  categories: [],
+  countryFlags: {'Saudi Arabia':'🇸🇦','UAE':'🇦🇪','Qatar':'🇶🇦','Oman':'🇴🇲','Bahrain':'🇧🇭','Kuwait':'🇰🇼','Malaysia':'🇲🇾'},
   vacancies: [],
   applications: [],
   employerInquiries: [],
   adminAuthed: false,
 };
-let idCounter = 100;
-const uid = () => (idCounter++).toString();
+const uid = () => (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : Date.now().toString(36)+Math.random().toString(36).slice(2);
 
-function seedVacancies(){
-  const today = new Date();
-  const inDays = (n) => { const d = new Date(today); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); };
-  state.vacancies = [
-    { id: uid(), title:'Site Electrician', employer:'Al Fahad Construction Co.', country:'Saudi Arabia', category:'Electricians', positions:15, salary:'1800-2200', currency:'SAR', accommodation:'Provided', food:'Provided', transportation:'Provided', duration:'2 Years (Renewable)', experience:'3+ years', qualification:'Diploma in Electrical', age:'22-40', gender:'Male', deadline:inDays(18), description:'Install, maintain and repair electrical systems on large construction sites.', requirements:'Valid trade certificate, safety training preferred.', benefits:'Free accommodation, food, transport, medical.', status:'published', featured:true, urgent:false, createdAt:inDays(-2) },
-    { id: uid(), title:'Heavy Duty Driver', employer:'Gulf Logistics LLC', country:'UAE', category:'Heavy Drivers', positions:10, salary:'1600-1900', currency:'AED', accommodation:'Provided', food:'Not Provided', transportation:'Provided', duration:'2 Years', experience:'5+ years', qualification:'Heavy Vehicle License', age:'25-45', gender:'Male', deadline:inDays(6), description:'Operate heavy trucks for logistics and material transport across UAE.', requirements:'Valid heavy license, clean driving record.', benefits:'Accommodation, transport, annual leave.', status:'published', featured:false, urgent:true, createdAt:inDays(-1) },
-    { id: uid(), title:'Registered Nurse', employer:'Al Noor Medical Group', country:'Qatar', category:'Healthcare Professionals', positions:8, salary:'4500-5200', currency:'QAR', accommodation:'Provided', food:'Not Provided', transportation:'Provided', duration:'3 Years', experience:'2+ years', qualification:'BSN / Nursing Diploma', age:'23-40', gender:'', deadline:inDays(30), description:'Provide patient care in a modern private hospital setting.', requirements:'Valid nursing license, Prometric preferred.', benefits:'Accommodation, transport, health insurance.', status:'published', featured:true, urgent:false, createdAt:inDays(-5) },
-    { id: uid(), title:'Construction Laborer', employer:'Bin Salem Contracting', country:'Saudi Arabia', category:'Construction Workers', positions:40, salary:'1200-1400', currency:'SAR', accommodation:'Provided', food:'Provided', transportation:'Provided', duration:'2 Years', experience:'Fresher accepted', qualification:'None required', age:'20-45', gender:'Male', deadline:inDays(3), description:'General labor for residential and commercial construction projects.', requirements:'Physically fit, willing to work outdoors.', benefits:'Accommodation, food, transport, medical.', status:'published', featured:false, urgent:true, createdAt:inDays(-3) },
-    { id: uid(), title:'Hotel Housekeeping Staff', employer:'Royal Oasis Hotels', country:'Oman', category:'Hospitality Workers', positions:12, salary:'900-1100', currency:'OMR', accommodation:'Provided', food:'Provided', transportation:'Not Provided', duration:'2 Years', experience:'1+ years', qualification:'Matric', age:'21-38', gender:'Female', deadline:inDays(25), description:'Maintain cleanliness and guest-ready standards across hotel rooms.', requirements:'Prior hospitality experience preferred.', benefits:'Accommodation, food, annual ticket.', status:'published', featured:false, urgent:false, createdAt:inDays(-8) },
-    { id: uid(), title:'Security Guard', employer:'Gulf Shield Security', country:'Bahrain', category:'Security Staff', positions:20, salary:'160-190', currency:'BHD', accommodation:'Provided', food:'Not Provided', transportation:'Provided', duration:'2 Years', experience:'2+ years', qualification:'Matric', age:'25-45', gender:'Male', deadline:inDays(14), description:'Provide security services at commercial and residential sites.', requirements:'Prior security experience, physically fit.', benefits:'Accommodation, transport, overtime pay.', status:'published', featured:false, urgent:false, createdAt:inDays(-4) },
-    { id: uid(), title:'CNC Machine Technician', employer:'Kuwait Steel Industries', country:'Kuwait', category:'Technicians', positions:6, salary:'220-260', currency:'KWD', accommodation:'Provided', food:'Provided', transportation:'Provided', duration:'2 Years', experience:'4+ years', qualification:'Diploma in Mechanical', age:'24-42', gender:'Male', deadline:inDays(40), description:'Operate and maintain CNC machinery in an industrial manufacturing plant.', requirements:'CNC certification preferred.', benefits:'Accommodation, food, transport, medical.', status:'published', featured:true, urgent:false, createdAt:inDays(-1) },
-    { id: uid(), title:'Civil Site Engineer', employer:'Al Fahad Construction Co.', country:'Saudi Arabia', category:'Engineers', positions:4, salary:'5500-6500', currency:'SAR', accommodation:'Provided', food:'Not Provided', transportation:'Provided', duration:'2 Years', experience:'5+ years', qualification:'B.Sc Civil Engineering', age:'26-45', gender:'', deadline:inDays(2), description:'Oversee daily site operations and quality control on major infrastructure projects.', requirements:'PEC registration preferred.', benefits:'Accommodation, transport, annual flight ticket.', status:'published', featured:true, urgent:true, createdAt:inDays(-6) },
-  ];
+/* ==========================================================================
+   REAL BACKEND — Supabase (shared database + auth + file storage) and
+   EmailJS (notification emails). Configure in config.js.
+   ========================================================================== */
+const CFG = window.PAKBOLAN_CONFIG || {};
+const backendReady = !!(CFG.SUPABASE_URL && CFG.SUPABASE_URL.indexOf('YOUR-PROJECT') === -1 && window.supabase);
+const sb = backendReady ? window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY) : null;
+if (!backendReady) console.warn('Supabase is not configured yet — edit config.js with your project URL and anon key.');
+
+if (CFG.EMAILJS_PUBLIC_KEY && window.emailjs) { try { window.emailjs.init(CFG.EMAILJS_PUBLIC_KEY); } catch(e){} }
+function notifyEmail(subject, message){
+  if (!CFG.EMAILJS_SERVICE_ID || !CFG.EMAILJS_TEMPLATE_ID || !window.emailjs) return;
+  window.emailjs.send(CFG.EMAILJS_SERVICE_ID, CFG.EMAILJS_TEMPLATE_ID, {
+    to_email: CFG.NOTIFY_EMAIL || 'almirahmed638@gmail.com', subject, message,
+  }).catch(err => console.warn('Email notification failed (check EmailJS setup in config.js):', err));
+}
+
+const BUCKET = 'candidate-documents';
+async function uploadDoc(file, folder){
+  if (!sb || !file) return null;
+  const ext = (file.name.split('.').pop() || 'dat');
+  const path = `${folder}/${uid()}.${ext}`;
+  const { error } = await sb.storage.from(BUCKET).upload(path, file, { upsert:false });
+  if (error) { console.warn('Upload failed:', error.message); return null; }
+  return path;
+}
+async function signedDocUrl(path){
+  if (!sb || !path) return null;
+  const { data, error } = await sb.storage.from(BUCKET).createSignedUrl(path, 600);
+  if (error) { console.warn('Could not sign document URL:', error.message); return null; }
+  return data.signedUrl;
 }
 
 /* ==========================================================================
-   PERSISTENCE — localStorage keeps data across reloads on this device/browser.
-   This is what was missing before: state only ever lived in JS memory.
-   Note: there is still no shared server database — this is per-browser only,
-   won't sync across different devices/visitors, and only works when the page
-   is actually opened as a real webpage (not inside a sandboxed preview).
+   DATA LOADING — every visitor reads/writes the same live Supabase tables.
    ========================================================================== */
-const LS_PREFIX = 'pakbolan_';
-function persistState(){
-  try{
-    localStorage.setItem(LS_PREFIX+'vacancies', JSON.stringify(state.vacancies));
-    localStorage.setItem(LS_PREFIX+'applications', JSON.stringify(state.applications));
-    localStorage.setItem(LS_PREFIX+'employerInquiries', JSON.stringify(state.employerInquiries));
-    localStorage.setItem(LS_PREFIX+'countries', JSON.stringify(state.countries));
-    localStorage.setItem(LS_PREFIX+'categories', JSON.stringify(state.categories));
-    localStorage.setItem(LS_PREFIX+'idCounter', String(idCounter));
-  }catch(e){ console.warn('Local save failed', e); }
-  writeLiveBackupFiles(); // no-op unless a live backup folder is connected
+async function loadCountriesAndCategories(){
+  if (!sb) return;
+  const [{ data: countries }, { data: categories }] = await Promise.all([
+    sb.from('countries').select('*').order('sort_order'),
+    sb.from('job_categories').select('*').order('sort_order'),
+  ]);
+  state.countries = (countries || []).map(c => c.name);
+  state.categories = (categories || []).map(c => c.name);
 }
-function loadPersistedState(){
-  try{
-    const raw = localStorage.getItem(LS_PREFIX+'vacancies');
-    if (raw === null) return false;
-    state.vacancies = JSON.parse(raw) || [];
-    state.applications = JSON.parse(localStorage.getItem(LS_PREFIX+'applications') || '[]');
-    state.employerInquiries = JSON.parse(localStorage.getItem(LS_PREFIX+'employerInquiries') || '[]');
-    const savedCountries = JSON.parse(localStorage.getItem(LS_PREFIX+'countries') || 'null');
-    const savedCategories = JSON.parse(localStorage.getItem(LS_PREFIX+'categories') || 'null');
-    if (savedCountries) state.countries = savedCountries;
-    if (savedCategories) state.categories = savedCategories;
-    const savedCounter = parseInt(localStorage.getItem(LS_PREFIX+'idCounter'), 10);
-    if (!isNaN(savedCounter)) idCounter = savedCounter;
-    return true;
-  }catch(e){ console.warn('Local load failed', e); return false; }
+async function loadVacancies(){
+  if (!sb) return;
+  const { data } = await sb.from('vacancies').select('*').order('created_at', { ascending:false });
+  state.vacancies = (data || []).map(v => ({
+    id: v.id, title: v.title, employer: v.employer, country: v.country, category: v.category,
+    positions: v.positions, salary: v.salary, currency: v.currency, accommodation: v.accommodation,
+    food: v.food, transportation: v.transportation, duration: v.duration, experience: v.experience,
+    qualification: v.qualification, age: v.age, gender: v.gender, deadline: v.deadline,
+    description: v.description, requirements: v.requirements, benefits: v.benefits,
+    status: v.status, featured: v.featured, urgent: v.urgent, createdAt: v.created_at,
+  }));
 }
-function clearPersistedState(){
-  Object.keys(localStorage).filter(k => k.startsWith(LS_PREFIX)).forEach(k => localStorage.removeItem(k));
+async function loadApplications(){
+  if (!sb || !state.adminAuthed) return;
+  const { data, error } = await sb.from('applications').select('*').order('created_at', { ascending:false });
+  if (error) { console.warn('Load applications failed:', error.message); return; }
+  state.applications = (data || []).map(a => ({
+    id: a.id, reference: a.reference, fullName: a.full_name, fatherName: a.father_name, dob: a.dob,
+    cnic: a.cnic, gender: a.gender, maritalStatus: a.marital_status, nationality: a.nationality,
+    city: a.city, province: a.province, phone: a.mobile, whatsapp: a.whatsapp, email: a.email,
+    profession: a.profession, jobCategory: a.job_category, qualification: a.qualification,
+    experience: a.total_experience, overseasExperience: a.overseas_experience,
+    currentEmployer: a.current_employer, currentJobTitle: a.current_job_title,
+    preferredCountry: a.preferred_country, preferredJob: a.preferred_job, expectedSalary: a.expected_salary,
+    cvFile: a.cv_path, passportFile: a.passport_path, cnicFile: a.cnic_file_path, photoFile: a.photo_path,
+    otherDocs: (a.other_docs_paths || []).join(', '),
+    status: a.status, adminNotes: a.admin_notes, createdAt: a.created_at,
+  }));
+}
+async function loadEmployerInquiries(){
+  if (!sb || !state.adminAuthed) return;
+  const { data, error } = await sb.from('employer_inquiries').select('*').order('created_at', { ascending:false });
+  if (error) { console.warn('Load employer inquiries failed:', error.message); return; }
+  state.employerInquiries = (data || []).map(e => ({
+    id: e.id, companyName: e.company_name, contactPerson: e.contact_person, email: e.email, phone: e.phone,
+    country: e.country, profession: e.profession, workers: e.workers, qualification: e.qualification,
+    experience: e.experience, salary: e.salary, benefits: e.benefits, notes: e.notes, createdAt: e.created_at,
+  }));
+}
+async function refreshPublicData(){
+  await Promise.all([loadCountriesAndCategories(), loadVacancies()]);
+}
+async function refreshAdminData(){
+  await Promise.all([loadApplications(), loadEmployerInquiries()]);
 }
 
 
@@ -1387,8 +1431,9 @@ function renderPublicCandidates(){
    APPLICATION FORM
    ========================================================================== */
 const appForm = $('#applicationForm');
-appForm.addEventListener('submit', (e) => {
+appForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  if (!sb){ showToast('The database isn\'t connected yet — check config.js.'); return; }
   let valid = true;
   $$('.field', appForm).forEach(f => f.classList.remove('invalid'));
 
@@ -1405,27 +1450,52 @@ appForm.addEventListener('submit', (e) => {
 
   if (!valid){ showToast('Please complete the required fields (Name, Mobile, Profession, CV).'); return; }
 
-  const fd = new FormData(appForm);
-  const fileNames = (name) => appForm.querySelector(`[name=${name}]`).files.length ? [...appForm.querySelector(`[name=${name}]`).files].map(f=>f.name).join(', ') : '';
+  const submitBtn = appForm.querySelector('button[type=submit]');
+  const originalBtnText = submitBtn.innerHTML;
+  submitBtn.disabled = true; submitBtn.innerHTML = 'Submitting…';
 
-  state.applications.unshift({
-    id: uid(),
-    fullName: fd.get('fullName'), fatherName: fd.get('fatherName'), dob: fd.get('dob'), cnic: fd.get('cnic'),
-    gender: fd.get('gender'), maritalStatus: fd.get('maritalStatus'), nationality: fd.get('nationality'),
-    city: fd.get('city'), province: fd.get('province'), phone: fd.get('mobile'), whatsapp: fd.get('whatsapp'), email: fd.get('email'),
-    profession: fd.get('profession'), jobCategory: fd.get('jobCategory'), qualification: fd.get('qualification'),
-    experience: fd.get('totalExperience'), overseasExperience: fd.get('overseasExperience'), currentEmployer: fd.get('currentEmployer'),
-    currentJobTitle: fd.get('currentJobTitle'), preferredCountry: fd.get('preferredCountry'), preferredJob: fd.get('preferredJob'),
-    expectedSalary: fd.get('expectedSalary'),
-    cvFile: fileNames('cv'), passportFile: fileNames('passport'), cnicFile: fileNames('cnicFile'), photoFile: fileNames('photo'), otherDocs: fileNames('otherDocs'),
-    status: 'New', adminNotes: '', createdAt: new Date().toISOString(),
-  });
+  try{
+    const fd = new FormData(appForm);
+    const fileOf = (name) => appForm.querySelector(`[name=${name}]`).files[0] || null;
+    const otherFiles = [...(appForm.querySelector('[name=otherDocs]').files || [])];
 
-  appForm.style.display = 'none';
-  $('#applicationSuccess').style.display = 'block';
-  showToast(`Notification queued for almirahmed638@gmail.com (demo — no real email sent)`);
-  renderPublicCandidates();
-  renderAdminAll();
+    const [cvPath, passportPath, cnicFilePath, photoPath] = await Promise.all([
+      uploadDoc(fileOf('cv'), 'cv'),
+      uploadDoc(fileOf('passport'), 'passport'),
+      uploadDoc(fileOf('cnicFile'), 'cnic'),
+      uploadDoc(fileOf('photo'), 'photo'),
+    ]);
+    const otherPaths = (await Promise.all(otherFiles.map(f => uploadDoc(f, 'other')))).filter(Boolean);
+
+    const row = {
+      full_name: fd.get('fullName'), father_name: fd.get('fatherName') || null, dob: fd.get('dob') || null,
+      cnic: fd.get('cnic') || null, gender: fd.get('gender') || null, marital_status: fd.get('maritalStatus') || null,
+      nationality: fd.get('nationality') || 'Pakistani', city: fd.get('city') || null, province: fd.get('province') || null,
+      mobile: fd.get('mobile'), whatsapp: fd.get('whatsapp') || null, email: fd.get('email') || null,
+      profession: fd.get('profession'), job_category: fd.get('jobCategory') || null, qualification: fd.get('qualification') || null,
+      total_experience: fd.get('totalExperience') || null, overseas_experience: fd.get('overseasExperience') || null,
+      current_employer: fd.get('currentEmployer') || null, current_job_title: fd.get('currentJobTitle') || null,
+      preferred_country: fd.get('preferredCountry') || null, preferred_job: fd.get('preferredJob') || null,
+      expected_salary: fd.get('expectedSalary') || null,
+      cv_path: cvPath, passport_path: passportPath, cnic_file_path: cnicFilePath, photo_path: photoPath,
+      other_docs_paths: otherPaths.length ? otherPaths : null,
+    };
+
+    const { data, error } = await sb.from('applications').insert(row).select('reference').single();
+    if (error) throw error;
+
+    notifyEmail(`New Application: ${row.full_name}`, `${row.full_name} (${row.mobile}) applied for ${row.profession}. Reference: ${data.reference}. Log into the admin dashboard to view full details.`);
+
+    $('#applicationSuccess').innerHTML = `<i class="fa-solid fa-circle-check"></i><h3>Application Received</h3><p>Thank you — your reference number is <b>${escapeHtml(data.reference)}</b>. Our recruitment team will review your profile and contact you if it matches an opportunity.</p>`;
+    appForm.style.display = 'none';
+    $('#applicationSuccess').style.display = 'block';
+    showToast('Application submitted successfully.');
+  }catch(err){
+    console.error(err);
+    showToast('Submission failed: ' + (err.message || 'please try again.'));
+  }finally{
+    submitBtn.disabled = false; submitBtn.innerHTML = originalBtnText;
+  }
 });
 $('#applyAnotherBtn').addEventListener('click', () => {
   appForm.reset();
