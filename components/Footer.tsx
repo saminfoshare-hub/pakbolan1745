@@ -32,8 +32,9 @@ export default function Footer() {
             <h5>Contact</h5>
             <ul>
               <li>Sardar M Ishaq Khan<br />0302-8202273</li>
+              <li>Sardar M Ishaq Khan<br />0300-0300262</li>
               <li>Muhammad Shakeel Khan<br />0300-8202273</li>
-              <li>almirahmed638@gmail.com</li>
+              <li>pakbolanintl.com</li>
             </ul>
           </div>
         </div>
