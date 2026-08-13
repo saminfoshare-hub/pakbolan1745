@@ -109,6 +109,13 @@ export default async function HomePage() {
                 <a href="https://wa.me/923028202273" target="_blank" rel="noopener" className="wa-btn"><i className="fa-brands fa-whatsapp" /> WhatsApp</a>
               </div>
             </div>
+              <div className="contact-person">
+              <h5>Sardar M Afaq Khan</h5><span className="role">Overseas Employment Promoter</span>
+              <div className="contact-actions">
+                <a href="tel:+923000300262" className="call-btn"><i className="fa-solid fa-phone" /> Call · 0300-0300262</a>
+                <a href="https://wa.me/92923000300262" target="_blank" rel="noopener" className="wa-btn"><i className="fa-brands fa-whatsapp" /> WhatsApp</a>
+              </div>
+            </div>
             <div className="contact-person">
               <h5>Muhammad Shakeel Khan</h5><span className="role">Overseas Employment Promoter</span>
               <div className="contact-actions">
@@ -118,7 +125,7 @@ export default async function HomePage() {
             </div>
             <div className="contact-email-card">
               <i className="fa-solid fa-envelope" />
-              <div><b>almirahmed638@gmail.com</b><span>Applications &amp; general inquiries</span></div>
+              <div><b>pakbolanintl@gmail.com</b><span>Applications &amp; general inquiries</span></div>
             </div>
           </div>
           <ContactForm />
